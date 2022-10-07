@@ -9,21 +9,21 @@ const MainLayout = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  //   React.useEffect(() => {
-  //     if (!isLoggedIn) {
-  //       navigate("/");
-  //     } else {
-  //       if (pathname === "/") {
-  //         if (user.isAdmin) {
-  //           navigate("/admin/dashboard");
-  //         } else {
-  //           navigate("/client/home");
-  //         }
-  //       } else {
-  //         navigate(pathname);
-  //       }
-  //     }
-  //   }, [isLoggedIn]);
+    React.useEffect(() => {
+      if (!isLoggedIn) {
+        navigate("/");
+      } else {
+        if (pathname === "/") {
+          if (user.isAdmin) {
+            navigate("/admin/home");
+          } else {
+            navigate("/client/home");
+          }
+        } else {
+          navigate(pathname);
+        }
+      }
+    }, [isLoggedIn]);
 
   return (
     <div>
