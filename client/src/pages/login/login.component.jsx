@@ -1,27 +1,27 @@
-import { Box, TextField, Typography } from "@mui/material";
-import React, { useState, useEffect } from "react";
-import Lottie from "react-lottie";
-import EmployeeLottie from "../../assets/employee.json";
-import * as S from "./login.styles";
-import { CustomButton } from "../../globals/styles";
-import { Icon } from "@iconify/react";
-import palette from "../../theme/palette";
-import useAuth from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Box, TextField, Typography } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import Lottie from 'react-lottie';
+import EmployeeLottie from '../../assets/employee.json';
+import * as S from './login.styles';
+import { CustomButton } from '../../globals/styles';
+import { Icon } from '@iconify/react';
+import palette from '../../theme/palette';
+import useAuth from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [data, setData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
-  const navigate = useNavigate; 
+  const navigate = useNavigate();
   const { login, isLoggedIn, user } = useAuth();
   const defaultOptions = {
     loop: true,
     autoplay: true,
     animationData: EmployeeLottie,
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
+      preserveAspectRatio: 'xMidYMid slice',
     },
   };
 
@@ -38,9 +38,9 @@ const Login = () => {
   useEffect(() => {
     if (isLoggedIn) {
       if (user.isAdmin) {
-        navigate("/admin/home");
+        navigate('/admin/home');
       } else {
-        navigate("/client/home");
+        navigate('/client/home');
       }
     }
   }, [isLoggedIn]);
@@ -48,7 +48,7 @@ const Login = () => {
   return (
     <S.LoginPage>
       <div className="logo">
-        <Typography sx={{ fontSize: "1.5em", fontWeight: 600 }}>
+        <Typography sx={{ fontSize: '1.5em', fontWeight: 600 }}>
           workfloe
         </Typography>
       </div>
@@ -66,7 +66,7 @@ const Login = () => {
               height="100px"
               color={palette.primary}
             />
-            <Typography sx={{ fontSize: "1.5em" }}>
+            <Typography sx={{ fontSize: '1.5em' }}>
               Login to your account!
             </Typography>
             <TextField
