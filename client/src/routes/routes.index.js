@@ -1,7 +1,7 @@
-import { Suspense, lazy } from "react";
-import { Navigate, useRoutes } from "react-router-dom";
+import { Suspense, lazy } from 'react';
+import { Navigate, useRoutes } from 'react-router-dom';
 
-import { CircularProgress } from "@mui/material";
+import { CircularProgress } from '@mui/material';
 
 const Loadable = (Component) => (props) => {
   return (
@@ -14,7 +14,7 @@ const Loadable = (Component) => (props) => {
               left: 0,
               width: 1,
               zIndex: 9999,
-              position: "fixed",
+              position: 'fixed',
             },
           }}
         />
@@ -28,25 +28,25 @@ const Loadable = (Component) => (props) => {
 export default function Router() {
   return useRoutes([
     {
-      path: "/",
+      path: '/',
       element: <Login />,
     },
     {
-      path: "/employee",
+      path: '/employee',
       element: <MainLayout />,
       children: [
         {
-          path: "home",
+          path: 'home',
           element: <EmployeeDashboard />,
         },
       ],
     },
     {
-      path: "/admin",
+      path: '/admin',
       element: <MainLayout />,
       children: [
         {
-          path: "home",
+          path: 'home',
           element: <AdminDashboard />,
         },
       ],
@@ -56,18 +56,17 @@ export default function Router() {
 
 //layouts
 const MainLayout = Loadable(
-  lazy(() => import("../layouts/mainLayout/mainLayout.component"))
+  lazy(() => import('../layouts/mainLayout/mainLayout.component'))
 );
 
-const Login = Loadable(lazy(() => import("../pages/login/login.component")));
+const Login = Loadable(lazy(() => import('../pages/login/login.component')));
 
 //employee pages
 const EmployeeDashboard = Loadable(
-  lazy(() => import("../pages/employeeDashboard/employeeDashboard.component"))
+  lazy(() => import('../pages/employeeDashboard/employeeDashboard.component'))
 );
-
 
 //admin pages
 const AdminDashboard = Loadable(
-  lazy(() => import("../pages/adminDashboard/adminDashboard.component"))
+  lazy(() => import('../pages/adminDashboard/adminDashboard.component'))
 );

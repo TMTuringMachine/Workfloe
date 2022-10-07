@@ -14,7 +14,7 @@ const Login = () => {
     email: '',
     password: '',
   });
-  const navigate = useNavigate; 
+  const navigate = useNavigate();
   const { login, isLoggedIn, user } = useAuth();
   const defaultOptions = {
     loop: true,
