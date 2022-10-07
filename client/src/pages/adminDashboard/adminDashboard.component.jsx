@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import { MainPage } from "../../globals/styles";
 
 const AdminDashboard = () => {
-  return (
-    <div>AdminDashboard</div>
-  )
-}
+  return <MainPage>rkwjfw</MainPage>;
+};
 
-export default AdminDashboard
+export default AdminDashboard;
