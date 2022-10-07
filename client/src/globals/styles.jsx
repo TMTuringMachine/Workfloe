@@ -13,3 +13,9 @@ export const CustomButton = styled(Button)(() => ({
     color: palette.surface,
   },
 }));
+
+export const MainPage = styled(Box)(() => ({
+  width: "100vw",
+  height: "100%",
+  backgroundColor: palette.backgrond1,
+}));

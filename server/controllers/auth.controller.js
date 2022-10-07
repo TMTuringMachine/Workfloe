@@ -54,13 +54,13 @@ export const signup = expressAsyncHandler(async (req, res) => {
     joiningDate:joiningDate || new Date(),
   });
   await user.save();
-  const token = jwt.sign(
-    {
-      _id: user._id,
-    },
-    process.env.JWT_SECRET,
-    { expiresIn: "10000m" }
-  );
+  // const token = jwt.sign(
+  //   {
+  //     _id: user._id,
+  //   },
+  //   process.env.JWT_SECRET,
+  //   { expiresIn: "10000m" }
+  // );
 
   return res
     .status(200)
