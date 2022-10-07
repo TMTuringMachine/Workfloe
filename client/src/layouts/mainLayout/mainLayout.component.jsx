@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
-import Header from "../../components/header/header.component";
-import { Box } from "@mui/material";
+import React, { useState, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useNavigate, useLocation } from 'react-router-dom';
+import Header from '../../components/header/header.component';
+import { Box } from '@mui/material';
 
 const MainLayout = () => {
   const { isLoggedIn, user } = useSelector((state) => state.auth);
@@ -12,13 +12,13 @@ const MainLayout = () => {
 
   React.useEffect(() => {
     if (!isLoggedIn) {
-      navigate("/");
+      navigate('/');
     } else {
-      if (pathname === "/") {
+      if (pathname === '/') {
         if (user.isAdmin) {
-          navigate("/admin/home");
+          navigate('/admin/home');
         } else {
-          navigate("/client/home");
+          navigate('/employee/home');
         }
       } else {
         navigate(pathname);
@@ -29,14 +29,14 @@ const MainLayout = () => {
   return (
     <Box
       sx={{
-        width: "100vw",
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
+        width: '100vw',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       <Header />
-      <Box sx={{ width: "100%", flex: 1 }}>
+      <Box sx={{ width: '100%', flex: 1 }}>
         <Outlet />
       </Box>
     </Box>
