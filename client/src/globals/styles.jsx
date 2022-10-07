@@ -18,4 +18,5 @@ export const MainPage = styled(Box)(() => ({
   width: "100vw",
   height: "100%",
   backgroundColor: palette.backgrond1,
+  padding:'30px'
 }));

@@ -6,7 +6,7 @@ import AddEmployeeModal from "../addEmployeeModal/addEmployeeModal.component";
 import * as S from "./header.styles";
 
 const Header = () => {
-  const [showAddModal, setShowAddModal] = useState(true);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   const toggleAddModal = () => {
     setShowAddModal(!showAddModal);
