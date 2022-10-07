@@ -6,6 +6,7 @@ import * as S from "./adminDashboard.styles";
 import palette from "../../theme/palette";
 import { DataGrid } from "@mui/x-data-grid";
 import useEmployees from "../../hooks/useEmployees";
+import AddEmployeeModal from "../../components/addEmployeeModal/addEmployeeModal.component";
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
@@ -16,17 +17,6 @@ const columns = [
   { field: "status", headerName: "Status", width: 100 },
 ];
 
-const rows = [
-  {
-    id: 1,
-    name: "Shivam",
-    email: "shivam@gmail.com",
-    department: "it",
-    phone: 1234,
-    status: "uo",
-  },
-];
-
 const formatData = (data) => {
   const nd = data.map((d) => ({
     id: d._id,
@@ -34,7 +24,7 @@ const formatData = (data) => {
     phone: d.phone,
     department: d.department,
     email: d.email,
-    status: d.status,
+    status: d.isActive,
   }));
 
   return nd;
@@ -42,10 +32,42 @@ const formatData = (data) => {
 
 const AdminDashboard = () => {
   const { getAllEmployees, employees } = useEmployees();
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [filteredEmployees, setFileteredEmployees] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const toggleAddModal = () => {
+    setShowAddModal(!showAddModal);
+  };
 
   useEffect(() => {
     getAllEmployees();
   }, []);
+
+  useEffect(() => {
+    setFileteredEmployees(employees);
+  }, [employees]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filterEmployees = (query) => {
+    const filteredEmp = employees.filter((e) => {
+      console.log(e, query, "uo");
+      return e?.name?.toLowerCase().includes(query?.toLowerCase());
+    });
+    setFileteredEmployees([...filteredEmp]);
+  };
+
+  useEffect(() => {
+    if (searchQuery == "") {
+      setFileteredEmployees(employees);
+    } else {
+      // console.log(searchQuery);
+      filterEmployees(searchQuery);
+    }
+  }, [searchQuery]);
 
   return (
     <MainPage>
@@ -120,11 +142,16 @@ const AdminDashboard = () => {
                 Quick Access
               </Typography>
               <S.InputsContainer>
-                <S.SearchInput placeholder="Search employee" type="text" />
+                <S.SearchInput
+                  placeholder="Search employee"
+                  type="text"
+                  onChange={handleSearchChange}
+                  value={searchQuery}
+                />
               </S.InputsContainer>
               <S.DataGridContainer>
                 <DataGrid
-                  rows={formatData(employees)}
+                  rows={formatData(filteredEmployees)}
                   columns={columns}
                   pageSize={100}
                   rowsPerPageOptions={[100]}
@@ -145,7 +172,7 @@ const AdminDashboard = () => {
               <Typography sx={{ fontSize: "1.2em", fontWeight: 700 }}>
                 Actions Bar
               </Typography>
-              <S.ActionBarItem>
+              <S.ActionBarItem onClick={toggleAddModal}>
                 <Icon
                   icon="wpf:add-user"
                   width="35px"
@@ -156,8 +183,30 @@ const AdminDashboard = () => {
                   <Typography sx={{ fontSize: "0.9em", fontWeight: 600 }}>
                     ADD EMPLOYEE
                   </Typography>
-                  <Typography sx={{ fontSize: "0.65em", color: "gray" }}>
+                  <Typography
+                    sx={{ fontSize: "0.65em", color: "gray" }}
+                    className="subtitle"
+                  >
                     Add new employee to the organization
+                  </Typography>
+                </Box>
+              </S.ActionBarItem>
+              <S.ActionBarItem onClick={() => {}}>
+                <Icon
+                  icon="fluent:people-team-16-filled"
+                  width="35px"
+                  height="35px"
+                  color={palette.primary}
+                />
+                <Box sx={{ width: "70%" }}>
+                  <Typography sx={{ fontSize: "0.9em", fontWeight: 600 }}>
+                    ALL EMPLOYEES
+                  </Typography>
+                  <Typography
+                    sx={{ fontSize: "0.65em", color: "gray" }}
+                    className="subtitle"
+                  >
+                    View all employee details in the organization
                   </Typography>
                 </Box>
               </S.ActionBarItem>
@@ -165,6 +214,7 @@ const AdminDashboard = () => {
           </S.DashboardRight>
         </S.DashboardRow>
       </S.DashboardContainer>
+      <AddEmployeeModal state={showAddModal} toggleModal={toggleAddModal} />
     </MainPage>
   );
 };

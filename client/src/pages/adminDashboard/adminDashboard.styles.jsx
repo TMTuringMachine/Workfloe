@@ -51,6 +51,12 @@ export const StatCard = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
   backgroundColor: "#fff",
+  cursor: "pointer",
+  transition: "all 0.2s ease-in-out",
+  "&:hover": {
+    transform: "scale(1.03)",
+    boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+  },
 }));
 
 export const DataGridContainer = styled(Box)(() => ({
@@ -82,7 +88,7 @@ export const ActionBarContainer = styled(Box)(() => ({
   padding: "20px",
   display: "flex",
   flexDirection: "column",
-  gap: "10px",
+  gap: "20px",
 }));
 
 export const ActionBarItem = styled(Box)(() => ({
@@ -92,9 +98,18 @@ export const ActionBarItem = styled(Box)(() => ({
   borderRadius: "10px",
   border: `3px solid ${palette.primary}`,
   display: "flex",
-  gap:'10px',
-  alignItems:'center'
+  gap: "10px",
+  alignItems: "center",
+  cursor: "pointer",
+  transition: "all 0.1s ease-in-out",
+  "&:hover": {
+    backgroundColor: palette.primary,
+    color: "#fff",
+    "& path": {
+      fill: "#fff",
+    },
+    "& .subtitle": {
+      color: "#fff",
+    },
+  },
 }));
-
-
-
