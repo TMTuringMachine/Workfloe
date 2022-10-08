@@ -1,4 +1,11 @@
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import {
+  PieChart,
+  Pie,
+  Sector,
+  Cell,
+  ResponsiveContainer,
+  Tooltip,
+} from 'recharts';
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 
 const PieChartComponent = ({ data }) => {
@@ -45,6 +52,7 @@ const PieChartComponent = ({ data }) => {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
+        <Tooltip />
       </PieChart>
     </ResponsiveContainer>
   );
