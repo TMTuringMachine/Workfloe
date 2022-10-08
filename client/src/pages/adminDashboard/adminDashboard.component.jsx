@@ -1,4 +1,4 @@
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Switch } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { MainPage } from "../../globals/styles";
 import { Icon } from "@iconify/react";
@@ -7,6 +7,7 @@ import palette from "../../theme/palette";
 import { DataGrid } from "@mui/x-data-grid";
 import useEmployees from "../../hooks/useEmployees";
 import AddEmployeeModal from "../../components/addEmployeeModal/addEmployeeModal.component";
+import axiosInstance from "../../utils/axiosInstance";
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
@@ -14,7 +15,26 @@ const columns = [
   { field: "email", headerName: "Email", width: 250 },
   { field: "department", headerName: "Department", width: 150 },
   { field: "phone", headerName: "Contact", width: 150 },
-  { field: "status", headerName: "Status", width: 100 },
+  {
+    field: "status",
+    headerName: "Status",
+    width: 100,
+    renderCell: (params) => {
+      const handleSwitchChange = async (e) => {
+        console.log(params.row.id, e.target.checked, "heheheh");
+        const res = await axiosInstance.post(
+          `user/changeStatus/${params.row.id}`,
+          { val: e.target.checked }
+        );
+      };
+      return (
+        <Switch
+          defaultChecked={params.row.status}
+          onChange={handleSwitchChange}
+        />
+      );
+    },
+  },
 ];
 
 const formatData = (data) => {
@@ -102,7 +122,7 @@ const AdminDashboard = () => {
                   />
                 </Box>
                 <Typography sx={{ fontSize: "2em", fontWeight: 700 }}>
-                  120
+                  {employees?.length || 0}
                 </Typography>
                 <Typography sx={{ fontWeight: 600, color: palette.primary }}>
                   employees

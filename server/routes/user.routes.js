@@ -1,10 +1,13 @@
 import express from "express";
 
-import {getAllEmployees} from '../controllers/user.controller.js';
+import {
+  getAllEmployees,
+  changeEmployeeStatus,
+} from "../controllers/user.controller.js";
 
 const router = express.Router();
 
 router.get("/employees", getAllEmployees);
-// router.get("/jwtVerify", jwtVerify);
+router.post("/changeStatus/:id", changeEmployeeStatus);
 
 export default router;

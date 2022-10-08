@@ -12,17 +12,40 @@ export const HeaderContainer = styled(Box)(() => ({
   justifyContent: "space-between",
 }));
 
-export const FlexRow = styled(Box)(()=>({
-    display: 'flex',
-    flexDirection:'row',
-    alignItems:'center',
-    gap:'30px'
-}))
+export const FlexRow = styled(Box)(() => ({
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  gap: "30px",
+}));
 
-export const CustomSearchBar = styled("input")(()=>({
-    width: '50vw',
-    outline:'none',
-    padding:'8px 20px',
-    borderRadius:'5px',
-    border:'none'
-}))
+export const CustomSearchBar = styled("input")(() => ({
+  width: "50vw",
+  outline: "none",
+  padding: "8px 20px",
+  borderRadius: "5px",
+  border: "none",
+}));
+
+export const HeaderMenu = styled(Box)(() => ({
+  width: "200px",
+  padding: "5px",
+  display: "flex",
+  flexDirection: "column",
+  gap: "8px",
+}));
+
+export const HeaderItem = styled(Box)(() => ({
+  width: "100%",
+  height: "fit-content",
+  padding: "8px",
+  cursor: "pointer",
+  display:'flex',
+  gap:'10px',
+  alignItems:'center',
+  "&:hover": {
+    backgroundColor: palette.primary,
+    borderRadius: "5px",
+    color: "#fff",
+  },
+}));

@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 export const login = expressAsyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }).populate("tasks");
   if (!user) {
     return res.send({
       error: true,
@@ -54,15 +54,30 @@ export const signup = expressAsyncHandler(async (req, res) => {
     joiningDate: joiningDate || new Date(),
   });
   await user.save();
-  const token = jwt.sign(
-    {
-      _id: user._id,
-    },
-    process.env.JWT_SECRET,
-    { expiresIn: '10000m' }
-  );
+  // const token = jwt.sign(
+  //   {
+  //     _id: user._id,
+  //   },
+  //   process.env.JWT_SECRET,
+  //   { expiresIn: '10000m' }
+  // );
 
   return res
     .status(200)
     .send({ ok: true, message: 'User created successfully!', token, user });
 });
+
+
+export const jwtVerify = async (req, res) => {
+  const token = req.headers.authorization;
+  console.log(`token: ${token}`);
+  if (!token) {
+    return res.send(null);
+  }
+  const decodeToken = jwt.verify(token, process.env.JWT_SECRET);
+  if (decodeToken) {
+    const user = await User.findById(decodeToken._id).populate("tasks");
+    return res.send({ user });
+  }
+  res.send(null);
+};

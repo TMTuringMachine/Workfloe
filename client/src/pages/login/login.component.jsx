@@ -54,7 +54,7 @@ const Login = () => {
       </div>
       <S.SectionsContainer>
         <S.LottieContainer>
-          <Lottie options={defaultOptions} height="100%" width="90%" />
+          <Lottie options={defaultOptions} height="80%" width="80%" />
         </S.LottieContainer>
         <S.LoginFormContainer>
           {/* <Typography sx={{fontSize:'2em',fontWeight:600,textAlign:'center'}} >Login to your workfloe account!</Typography> */}

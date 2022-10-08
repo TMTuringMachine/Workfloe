@@ -3,6 +3,7 @@ import "dotenv/config";
 
 import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
+import taskRoutes from "./routes/task.routes.js";
 
 import cors from "cors";
 
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
+app.use("/task", taskRoutes);
 
 app.listen(port, () => {
   console.log(`server started on http://localhost:${port}`);
