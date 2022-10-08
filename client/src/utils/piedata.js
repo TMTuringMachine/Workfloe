@@ -24,6 +24,21 @@ export const getPieData = (tasks, date) => {
   return data;
 };
 
+export const getTasksFromDate = (tasks, date) => {
+  const nd = moment(date).format("MMM Do YY");
+  let newtasks = [];
+  console.log(tasks, "here are the tasks!", date,nd);
+  tasks.map((t) => {
+    const tDate = moment(t.startTime).format("MMM Do YY");
+
+    if (tDate === nd) {
+      newtasks.push(t);
+    }
+  });
+  console.log(newtasks);
+  return newtasks;
+};
+
 const days = [
   "Saturday",
   "Sunday",

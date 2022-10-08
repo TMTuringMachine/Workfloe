@@ -22,7 +22,8 @@ import {
   Legend,
   Tooltip,
 } from "recharts";
-import { MainPage } from "../../globals/styles";
+import { CustomButton, MainPage } from "../../globals/styles";
+import EmployeeDetailsModal from "../../components/employeeDetailModal/employeeDetailModa.component";
 
 const getTasksCount = (tasks) => {
   const meetings = tasks.filter((a) => a.category == "meeting").length;
@@ -85,6 +86,11 @@ const EmployeeDashboard = () => {
   var yesterday = new Date(Date.now() - 864e5);
   const cDate = moment(new Date()).format("MMM Do YY");
   const yDate = moment(yesterday).format("MMM Do YY");
+  const [showDateModal, setShowDateModal] = useState(false);
+
+  const toggleDateModal = () => {
+    setShowDateModal(!showDateModal);
+  };
 
   return (
     <MainPage>
@@ -96,16 +102,32 @@ const EmployeeDashboard = () => {
           flexDirection: "column",
         }}
       >
-        <Typography
+        <Box
           sx={{
-            fontSize: "2em",
-            letterSpacing: "2px",
-            fontWeight: 600,
+            display: "flex",
+            width: "100%",
+            alignItems: "center",
             marginBottom: "20px",
+            justifyContent: "space-between",
+            paddingRight: "20px",
           }}
         >
-          Good Morning, {user?.name}!
-        </Typography>
+          <Typography
+            sx={{
+              fontSize: "2em",
+              letterSpacing: "2px",
+              fontWeight: 600,
+            }}
+          >
+            Good Morning, {user?.name}!
+          </Typography>
+          <CustomButton onClick={toggleDateModal}>FILTER BY DATE</CustomButton>
+          <EmployeeDetailsModal
+            state={showDateModal}
+            toggleModal={toggleDateModal}
+            tasks={user.tasks}
+          />
+        </Box>
         <Box
           sx={{
             display: "flex",

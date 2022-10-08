@@ -4,7 +4,7 @@ import { MainPage } from "../../globals/styles";
 import * as S from "./employeeDetail.styles";
 import { useParams } from "react-router-dom";
 import useEmployees from "../../hooks/useEmployees";
-import { Avatar, Typography, Switch, colors } from "@mui/material";
+import { Avatar, Typography, Switch, colors, Button } from "@mui/material";
 import { Icon } from "@iconify/react";
 import axiosInstance from "../../utils/axiosInstance";
 import {
@@ -21,10 +21,13 @@ import moment from "moment";
 import PieChartCard from "../employeeDashboard/PieChartCard";
 
 import { getPieData, getWeekData } from "../../utils/piedata";
+import palette from "../../theme/palette";
+
+import EmployeeDetailsModal from "../../components/employeeDetailModal/employeeDetailModa.component";
 
 const EmployeeDetail = () => {
   const { id } = useParams();
-
+  const [showDateModal, setShowDateModal] = useState(false);
   const { getEmployeeDetails, currentEmployee } = useEmployees();
   const [employeeStatus, setEmployeeStatus] = useState(false);
   var yday = new Date(Date.now() - 864e5);
@@ -34,6 +37,10 @@ const EmployeeDetail = () => {
   useEffect(() => {
     getEmployeeDetails(id);
   }, [id]);
+
+  const toggleDateModal = () => {
+    setShowDateModal(!showDateModal);
+  };
 
   const handleSwitchChange = async (e) => {
     setEmployeeStatus(e.target.checked);
@@ -97,6 +104,26 @@ const EmployeeDetail = () => {
                   onChange={handleSwitchChange}
                 />
               </S.EmployeeInfo>
+              <Button
+                sx={{
+                  backgroundColor: palette.primary,
+                  width: "100%",
+                  color: "#fff",
+                  borderRadius: "10px",
+                  "&:hover": {
+                    backgroundColor: palette.primary,
+                    color: "#fff",
+                  },
+                }}
+                onClick={toggleDateModal}
+              >
+                FILTER BY DATE
+              </Button>
+              <EmployeeDetailsModal
+                state={showDateModal}
+                toggleModal={toggleDateModal}
+                tasks={currentEmployee.tasks}
+              />
             </S.EmployeeInfoContainer>
           </S.ContainerLeft>
           <S.ContainerRight>
