@@ -32,7 +32,19 @@ const Header = () => {
     <S.HeaderContainer>
       <S.FlexRow>
         <Typography
-          sx={{ fontSize: "1.2em", fontWeight: 700, color: palette.surface }}
+          sx={{
+            fontSize: "1.2em",
+            fontWeight: 700,
+            color: palette.surface,
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            if (user.isAdmin) {
+              navigate("/admin/home");
+            } else {
+              navigate("/employee/home");
+            }
+          }}
         >
           workfloe
         </Typography>
@@ -51,10 +63,7 @@ const Header = () => {
           </Button>
         ) : null}
         <AddTaskModal state={showTaskModal} toggleModal={toggleTaskModal} />
-        <Avatar
-          src="https://i0.wp.com/www.mocamboo.com/wp-content/uploads/2021/12/n-1639218372l48cp.jpg?fit=700%2C875&ssl=1"
-          onClick={handleClick}
-        />
+        <Avatar src={user?.profilePic?.path} onClick={handleClick} />
 
         <Popover
           id={id}

@@ -1,7 +1,7 @@
-import expressAsyncHandler from 'express-async-handler';
-import User from '../models/user.model.js';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import expressAsyncHandler from "express-async-handler";
+import User from "../models/user.model.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const login = expressAsyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -10,25 +10,25 @@ export const login = expressAsyncHandler(async (req, res) => {
   if (!user) {
     return res.send({
       error: true,
-      message: 'User with this email does not exist!',
+      message: "User with this email does not exist!",
     });
   }
 
   const isAuth = await bcrypt.compare(password, user.password);
   if (!isAuth) {
-    return res.send({ error: true, message: 'Incorrect credentials!' });
+    return res.send({ error: true, message: "Incorrect credentials!" });
   }
   const token = jwt.sign(
     {
       _id: user._id,
     },
     process.env.JWT_SECRET,
-    { expiresIn: '100000m' }
+    { expiresIn: "100000m" }
   );
 
   return res.send({
     ok: true,
-    message: 'User successfully logged in!',
+    message: "User successfully logged in!",
     user,
     token,
   });
@@ -41,7 +41,7 @@ export const signup = expressAsyncHandler(async (req, res) => {
   if (userExist) {
     return res.send({
       ok: false,
-      message: 'User with this email already exist!',
+      message: "User with this email already exist!",
     });
   }
   const hash = await bcrypt.hash(password, 10);
@@ -64,9 +64,8 @@ export const signup = expressAsyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .send({ ok: true, message: 'User created successfully!', token, user });
+    .send({ ok: true, message: "User created successfully!", token, user });
 });
-
 
 export const jwtVerify = async (req, res) => {
   const token = req.headers.authorization;
@@ -80,4 +79,34 @@ export const jwtVerify = async (req, res) => {
     return res.send({ user });
   }
   res.send(null);
+};
+
+export const changePassword = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { oldpassword, newpassword } = req.body;
+    console.log(req.body, "heheheh");
+    const user = await User.findById(id);
+    if (!user) {
+      return res.send({ ok: false, message: "User not found!" });
+    }
+
+    const isAuth = await bcrypt.compare(oldpassword, user.password);
+
+    if (!isAuth) {
+      return res.send({ ok: false, message: "Incorrect credentials" });
+    }
+
+    const hash = await bcrypt.hash(newpassword, 10);
+    user.password = hash;
+
+    await user.save();
+
+    return res
+      .status(200)
+      .send({ ok: true, message: "Password changes successfully" });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send({ message: "Something went wrong!" });
+  }
 };

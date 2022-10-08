@@ -38,6 +38,10 @@ const UserSchema = new Schema({
       ref: "Task",
     },
   ],
+  profilePic: {
+    path: String,
+    filename: String,
+  },
 });
 
 const User = mongoose.model("User", UserSchema);
