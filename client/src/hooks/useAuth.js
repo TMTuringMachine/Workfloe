@@ -1,7 +1,7 @@
-import { useCallback } from 'react';
+import { useCallback } from "react";
 
 //libs
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 
 //redux
 import {
@@ -9,12 +9,13 @@ import {
   initialize,
   logoutSuccess,
   registerSuccess,
-} from '../redux/slices/auth';
-import { useSnackbar } from 'notistack';
+} from "../redux/slices/auth";
+import { useSnackbar } from "notistack";
 
-import { isValidToken, setSession } from '../utils/jwt';
-import { useNavigate } from 'react-router-dom';
-import axios from '../utils/axiosInstance';
+import { isValidToken, setSession } from "../utils/jwt";
+import { useNavigate } from "react-router-dom";
+import axios from "../utils/axiosInstance";
+import axiosInstance from "../utils/axiosInstance";
 
 const useAuth = () => {
   const { isLoggedIn, user } = useSelector((state) => state.auth);
@@ -23,21 +24,21 @@ const useAuth = () => {
   const navigate = useNavigate();
 
   const registerClient = useCallback(async (userData, toggleModal) => {
-    const response = await axios.post('/auth/signup', userData);
-    console.log(response, 'i am signup response');
+    const response = await axios.post("/auth/signup", userData);
+    console.log(response, "i am signup response");
     if (!response.data.ok) {
-      enqueueSnackbar(response.data.message, { variant: 'error' });
+      enqueueSnackbar(response.data.message, { variant: "error" });
       return;
     }
     toggleModal();
-    enqueueSnackbar(response.data.message, { variant: 'success' });
+    enqueueSnackbar(response.data.message, { variant: "success" });
   }, []);
 
   const login = useCallback(async (userData) => {
-    const response = await axios.post('/auth/login', userData);
-    console.log(response, 'i am login response');
+    const response = await axios.post("/auth/login", userData);
+    console.log(response, "i am login response");
     if (!response.data.ok) {
-      enqueueSnackbar(response.data.message, { variant: 'error' });
+      enqueueSnackbar(response.data.message, { variant: "error" });
       return;
     } else {
       const { token, user } = response.data;
@@ -49,16 +50,16 @@ const useAuth = () => {
   const logout = useCallback(async () => {
     setSession(null);
     dispatch(logoutSuccess());
-    navigate('/');
+    navigate("/");
   }, []);
 
   const initializeAuth = useCallback(async () => {
-    const accessToken = window.localStorage.getItem('accessToken');
+    const accessToken = window.localStorage.getItem("accessToken");
 
     if (isValidToken(accessToken)) {
       setSession(accessToken);
-      const response = await axios.get('/auth/jwtVerify');
-      console.log(response, 'i am initialize response');
+      const response = await axios.get("/auth/jwtVerify");
+      console.log(response, "i am initialize response");
       if (response) {
         const { user } = response.data;
         delete user.password;
@@ -86,6 +87,21 @@ const useAuth = () => {
     }
   }, []);
 
+  const changePassword = useCallback(async (data) => {
+    const res = await axiosInstance.post(
+      `/auth/changePassword/${user._id}`,
+      data
+    );
+    console.log(res, "change password response");
+    if (!res.data.ok) {
+      enqueueSnackbar(res.data?.message || "Something went wrong!", {
+        variant: "error",
+      });
+      return;
+    }
+    enqueueSnackbar("Password changed successfully!", { variant: "success" });
+  }, []);
+
   return {
     registerClient,
     login,
@@ -93,6 +109,7 @@ const useAuth = () => {
     initializeAuth,
     isLoggedIn,
     user,
+    changePassword,
   };
 };
 
