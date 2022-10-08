@@ -11,7 +11,7 @@ import palette from "../../theme/palette";
 import useAuth from "../../hooks/useAuth";
 import moment from "moment";
 import PieChartCard from "./PieChartCard";
-import { getPieData } from "../../utils/piedata";
+import { getPieData, getWeekData } from "../../utils/piedata";
 import {
   BarChart,
   Bar,
@@ -86,16 +86,6 @@ const EmployeeDashboard = () => {
   const cDate = moment(new Date()).format("MMM Do YY");
   const yDate = moment(yesterday).format("MMM Do YY");
 
-  const data1 = [
-    { name: "Monday", meeting: 12, break: 23, work: 122 },
-    { name: "Tuesday", meeting: 22, break: 3, work: 73 },
-    { name: "Wednesday", meeting: 13, break: 15, work: 32 },
-    { name: "Thrusday", meeting: 44, break: 35, work: 23 },
-    { name: "Friday", meeting: 35, break: 45, work: 20 },
-    { name: "Saturday", meeting: 62, break: 25, work: 29 },
-    { name: "Sunday", meeting: 37, break: 17, work: 61 },
-  ];
-
   return (
     <MainPage>
       <Box
@@ -140,7 +130,7 @@ const EmployeeDashboard = () => {
                 width: "100%",
                 height: "fit-content",
                 padding: "20px",
-                backgroundColor: "#fff",
+                // backgroundColor: "#fff",
                 boxShadow: "10px 10px 20px #cbcdce, -10px -10px 20px #ffffff;",
                 borderRadius: "20px",
                 display: "flex",
@@ -267,7 +257,11 @@ const EmployeeDashboard = () => {
 
             <BarChartStyles>
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart width="100%" height="100%" data={data1}>
+                <BarChart
+                  width="100%"
+                  height="100%"
+                  data={getWeekData(user.tasks)}
+                >
                   <CartesianGrid />
                   <XAxis dataKey="name" />
                   <YAxis />
