@@ -47,9 +47,5 @@ export const LoginCard = styled(Box)(() => ({
   display:'flex',
   flexDirection:'column',
   alignItems:'center',
-//   '& .logo':{
-//     wid
-
-//   },
 
 }));

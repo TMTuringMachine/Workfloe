@@ -8,11 +8,13 @@ export const getAllEmployees = async (req, res) => {
       message: "Employees fetched successfully!",
       employees,
     });
+
   } catch (err) {
     console.log(err);
     return res.status(400).send({ message: "Something went wrong!" });
   }
 };
+
 
 export const changeEmployeeStatus = async (req, res) => {
   try {
@@ -35,3 +37,5 @@ export const changeEmployeeStatus = async (req, res) => {
     return res.status(400).send({ message: "Something went wrong!" });
   }
 };
+
+

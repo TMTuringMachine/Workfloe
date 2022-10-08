@@ -122,7 +122,7 @@ const AdminDashboard = () => {
                   />
                 </Box>
                 <Typography sx={{ fontSize: "2em", fontWeight: 700 }}>
-                  120
+                  {employees?.length || 0}
                 </Typography>
                 <Typography sx={{ fontWeight: 600, color: palette.primary }}>
                   employees
