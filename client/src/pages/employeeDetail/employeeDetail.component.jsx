@@ -16,15 +16,21 @@ import {
   ResponsiveContainer,
   Legend,
   Tooltip,
-  Pie,
-  PieChart,
-  Cell,
+
 } from "recharts";
+import moment from "moment";
+import PieChartCard from "../employeeDashboard/PieChartCard";
+
+import { getPieData } from "../../utils/piedata";
 
 const EmployeeDetail = () => {
   const { id } = useParams();
+
   const { getEmployeeDetails, currentEmployee } = useEmployees();
   const [employeeStatus, setEmployeeStatus] = useState(false);
+  var yday = new Date(Date.now() - 864e5);
+  const today = moment(new Date()).format("MMM Do YY");
+  const yestarday = moment(yday).format("MMM Do YY");
 
   const data = [
     { name: "Monday", meeting: 12, break: 23, work: 122 },
@@ -36,22 +42,6 @@ const EmployeeDetail = () => {
     { name: "Sunday", meeting: 37, break: 17, work: 61 },
   ];
 
-  const colors = ["#6F6AF8", "#9523db", "#23dbde"];
-
-  const data01 = [
-    {
-      name: "Meeting",
-      value: 400,
-    },
-    {
-      name: "Break",
-      value: 300,
-    },
-    {
-      name: "Work",
-      value: 300,
-    },
-  ];
 
   useEffect(() => {
     getEmployeeDetails(id);
@@ -142,23 +132,9 @@ const EmployeeDetail = () => {
                   Todays task distribution
                 </Typography>
                 <ResponsiveContainer width="100%" height="90%">
-                  <PieChart width="100%" height="100%">
-                    <Pie
-                      data={data01}
-                      dataKey="value"
-                      nameKey="name"
-                      cx="50%"
-                      cy="50%"
-                      outerRadius={80}
-                      fill="#8884d8"
-                    >
-                      {data01.map((entry, idx) => (
-                        <Cell fill={colors[idx]} />
-                      ))}
-                    </Pie>
-                    <Tooltip />
-                    <Legend />
-                  </PieChart>
+                  <PieChartCard
+                    data={getPieData(currentEmployee.tasks, today)}
+                  />
                 </ResponsiveContainer>
               </S.PieChartContainer>
               <S.PieChartContainer>
@@ -166,23 +142,9 @@ const EmployeeDetail = () => {
                   Yestarday's task distribution
                 </Typography>
                 <ResponsiveContainer width="100%" height="90%">
-                  <PieChart width="100%" height="100%">
-                    <Pie
-                      data={data01}
-                      dataKey="value"
-                      nameKey="name"
-                      cx="50%"
-                      cy="50%"
-                      outerRadius={80}
-                      fill="#8884d8"
-                    >
-                      {data01.map((entry, idx) => (
-                        <Cell fill={colors[idx]} />
-                      ))}
-                    </Pie>
-                    <Tooltip />
-                    <Legend />
-                  </PieChart>
+                  <PieChartCard
+                    data={getPieData(currentEmployee.tasks, yestarday)}
+                  />
                 </ResponsiveContainer>
               </S.PieChartContainer>
             </S.PieChartsContainer>

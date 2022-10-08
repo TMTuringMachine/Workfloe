@@ -1,8 +1,10 @@
 import { styled, Box } from "@mui/material";
 import palette from "../../theme/palette";
 export const PieChartStyles = styled(Box)(() => ({
-  width: "24rem",
-  height: "15rem",
+  // width: "24rem",
+  width: "100%",
+  height: "14rem",
+  // flex:1,
   padding: "15px",
   borderRadius: "30px",
   boxShadow: "10px 10px 20px #cbcdce, -10px -10px 20px #ffffff;",
@@ -10,27 +12,33 @@ export const PieChartStyles = styled(Box)(() => ({
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  margin: "1rem",
+  // margin: "1rem",
 }));
 export const RightSide = styled(Box)(() => ({
-  width: "fit-content",
-  height: "100vh",
+  // width: "fit-content",
+  // maxWidth:"68vw",
+  flex: 1,
+  height: "100%",
+  // maxWidth:'70vw',
   display: "flex",
   justifyContent: "flex-start",
   alignItems: "center",
   flexDirection: "column",
-  marginLeft: "1rem",
+  padding: "0px 10px",
+  gap: "30px",
 }));
 export const Card = styled(Box)(() => ({
-  width: "18rem",
-  height: "10rem",
+  // width: "18rem",
+  flex: 1,
+  // height: "10rem",
+  height:"100%",
   padding: "15px",
   borderRadius: "30px",
   boxShadow: "10px 10px 20px #cbcdce, -10px -10px 20px #ffffff;",
   display: "flex",
   flexDirection: "column",
-  margin: "1rem",
-  marginTop: "0rem",
+  // margin: "1rem",
+  // marginTop: "0rem",
   justifyContent: "space-between",
   alignItems: "flex-start",
   padding: "1rem",
@@ -42,11 +50,10 @@ export const Card = styled(Box)(() => ({
 
 export const BarChartStyles = styled(Box)(() => ({
   width: "100%",
-  height: "90%",
+  flex: 1,
   padding: "15px",
   borderRadius: "30px",
   boxShadow: "10px 10px 20px #cbcdce, -10px -10px 20px #ffffff;",
   display: "flex",
   flexDirection: "column",
-  margin: "1rem",
 }));
