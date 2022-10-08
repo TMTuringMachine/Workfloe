@@ -22,7 +22,7 @@ export const ContainerRight = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  gap: "30px",
+  gap: "20px",
 }));
 
 export const EmployeeInfoContainer = styled(Box)(() => ({
@@ -57,7 +57,7 @@ export const BarChartContainer = styled(Box)(() => ({
   borderRadius: "20px",
   boxShadow: palette.shadow1,
   backgroundColor: "#fff",
-  padding: "30px",
+  padding: "30px 30px 0px 0px",
   flex: 1,
 }));
 

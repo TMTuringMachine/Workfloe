@@ -1,0 +1,17 @@
+{
+  "name": "flipr-hackathon",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:TMTuringMachine/Workfloe.git",
+  "author": "shivam256 <shivamgavandi256@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "cd server && npm run nodemon",
+    "frontend": "cd client && npm run start",
+    "dev": "concurrently -c \"bgMagenta,bgBlue,\" npm:server npm:frontend"
+  },
+  "dependencies": {
+    "concurrently": "^7.4.0"
+  }
+}
