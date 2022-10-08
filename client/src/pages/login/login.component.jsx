@@ -40,7 +40,7 @@ const Login = () => {
       if (user.isAdmin) {
         navigate('/admin/home');
       } else {
-        navigate('/client/home');
+        navigate('/employee/home');
       }
     }
   }, [isLoggedIn]);
