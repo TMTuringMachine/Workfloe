@@ -8,6 +8,8 @@ export const PieChartStyles = styled(Box)(() => ({
   boxShadow: '10px 10px 20px #cbcdce, -10px -10px 20px #ffffff;',
   display: 'flex',
   flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
   margin: '1rem',
 }));
 export const RightSide = styled(Box)(() => ({
