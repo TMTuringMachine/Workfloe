@@ -27,7 +27,7 @@ const MainLayout = () => {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    if (user.isAdmin) {
+    if (!user.isAdmin) {
       navigate("/");
     }
   }, [user]);
