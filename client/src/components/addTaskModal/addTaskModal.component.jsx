@@ -34,6 +34,15 @@ const AddTaskModal = ({ state, toggleModal }) => {
     // registerClient(data, toggleModal);
   };
 
+  const maxDate = ()=>{
+    var today,dd,mm,yyyy;
+    today = new Date();
+    dd = today.getDate()+1;
+    mm = today.getMonth()+1;
+    yyyy = today.getFullYear();
+    return yyyy+"-"+mm+"-"+dd
+  }
+
   return (
     <Modal open={state} onClose={toggleModal}>
       <Slide direction="up" in={state}>
@@ -82,10 +91,11 @@ const AddTaskModal = ({ state, toggleModal }) => {
             }}
           >
             <Typography>Start time:</Typography>
-            <input onChange={handleChange} name="startTime" type="date" />
+            <input max={maxDate()} onChange={handleChange} name="startTime" type="date" />
           </Box>
           <TextField
             name="duration"
+            type={"number"}
             label="Task duration(in mins)"
             variant="standard"
             fullWidth

@@ -37,6 +37,33 @@ const getTasksCount = (tasks) => {
   };
 };
 
+const minToHours = (mins)=>{
+  var hours = Math.trunc(mins/60);
+  var minutes = mins % 60;
+  return hours +"."+ minutes;
+}
+
+const getTaskDuration = (tasks)=>{
+  var meeting=0
+  var work=0
+  var totalbreak=0;
+  // console.log(tasks)
+  for(var i=0;i<tasks.length;i++){
+      if(tasks[i].category==='work'){
+        work+=tasks[i].duration
+      }else if(tasks[i].category==='break'){
+        totalbreak+=tasks[i].duration
+      }else if(tasks[i].category==='meeting'){
+        meeting+=tasks[i].duration
+      }
+  }
+
+  return {
+    meeting:minToHours(meeting),work:minToHours(work),totalbreak:minToHours(totalbreak)
+  }
+
+}
+
 // const getTaskAsPerDay = (tasks, setCurrDayData, setPrevDayData) => {
 //   var yesterday = new Date(Date.now() - 864e5);
 //   const cDate = moment(new Date()).format("MMM Do YY");
@@ -83,6 +110,7 @@ const getTasksCount = (tasks) => {
 const EmployeeDashboard = () => {
   const { user } = useAuth();
   const data = getTasksCount(user.tasks);
+  const duration = getTaskDuration(user.tasks)
   var yesterday = new Date(Date.now() - 864e5);
   const cDate = moment(new Date()).format("MMM Do YY");
   const yDate = moment(yesterday).format("MMM Do YY");
@@ -221,7 +249,7 @@ const EmployeeDashboard = () => {
                   color="black"
                 />
                 <Typography sx={{ fontSize: "1.2rem", fontWeight: "bold" }}>
-                  {data.meetings ? data.meetings : 0}
+                  {duration.meeting ? duration.meeting:null} Hours
                 </Typography>
                 <Typography
                   sx={{
@@ -241,8 +269,8 @@ const EmployeeDashboard = () => {
                   height="40px"
                   color="black"
                 />
-                <Typography sx={{ fontSize: "1.2rem", fontWeight: "bold" }}>
-                  {data.works ? data.works : 0}
+                 <Typography sx={{ fontSize: "1.2rem", fontWeight: "bold" }}>
+                  {duration.work ? duration.work:null} Hours
                 </Typography>
                 <Typography
                   sx={{
@@ -263,7 +291,7 @@ const EmployeeDashboard = () => {
                   color="black"
                 />
                 <Typography sx={{ fontSize: "1.2rem", fontWeight: "bold" }}>
-                  {data.breaks ? data.breaks : 0}
+                  {duration.totalbreak ? duration.totalbreak:null} Hours
                 </Typography>
                 <Typography
                   sx={{

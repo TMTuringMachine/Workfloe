@@ -85,3 +85,23 @@ export const getOneEmployee = async (req, res) => {
     return res.status(400).send({ message: "Something went wrong!" });
   }
 };
+
+export const deleteEmployee = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const deleteUser = await User.findByIdAndDelete(id);
+    if(deleteUser){
+      return res.status(200).send({
+        ok: true,
+        message: "Employee Removed",
+      });
+    }else{
+      return res.status(400).send({ message: "Something went wrong!" });
+    }    
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send({ message: "Something went wrong!" });
+  }
+};
+
+
