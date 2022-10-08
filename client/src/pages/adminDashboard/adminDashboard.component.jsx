@@ -8,67 +8,19 @@ import { DataGrid } from "@mui/x-data-grid";
 import useEmployees from "../../hooks/useEmployees";
 import AddEmployeeModal from "../../components/addEmployeeModal/addEmployeeModal.component";
 import axiosInstance from "../../utils/axiosInstance";
+import { useSnackbar } from "notistack";
 
-const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "name", headerName: "Employee Name", width: 200 },
-  { field: "email", headerName: "Email", width: 250 },
-  { field: "department", headerName: "Department", width: 150 },
-  { field: "phone", headerName: "Contact", width: 150 },
-  {
-    field: "status",
-    headerName: "Status",
-    width: 100,
-    renderCell: (params) => {
-      const handleSwitchChange = async (e) => {
-        console.log(params.row.id, e.target.checked, "heheheh");
-        const res = await axiosInstance.post(
-          `user/changeStatus/${params.row.id}`,
-          { val: e.target.checked }
-        );
-      };
-      return (
-        <Switch
-          defaultChecked={params.row.status}
-          onChange={handleSwitchChange}
-        />
-      );
-    },
-  },
-  {
-    field: "details",
-    headerName: "Details",
-    width: 100,
-    renderCell: (params) => {
-      return (
-        <IconButton onClick={()=>{
-          window.open(`/admin/employee/${params.row.id}`)          
-        }} >
-          <Icon icon="bx:link-external"  />
-        </IconButton>
-      );
-    },
-  },
-];
 
-const formatData = (data) => {
-  const nd = data.map((d) => ({
-    id: d._id,
-    name: d.name,
-    phone: d.phone,
-    department: d.department,
-    email: d.email,
-    status: d.isActive,
-  }));
 
-  return nd;
-};
 
 const AdminDashboard = () => {
   const { getAllEmployees, employees } = useEmployees();
   const [showAddModal, setShowAddModal] = useState(false);
   const [filteredEmployees, setFileteredEmployees] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const { enqueueSnackbar } = useSnackbar();
+  const [changed,setChanged] = useState(false);
+
 
   const toggleAddModal = () => {
     setShowAddModal(!showAddModal);
@@ -76,7 +28,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     getAllEmployees();
-  }, []);
+  }, [changed]);
 
   useEffect(() => {
     setFileteredEmployees(employees);
@@ -102,6 +54,92 @@ const AdminDashboard = () => {
       filterEmployees(searchQuery);
     }
   }, [searchQuery]);
+
+  const columns = [
+    { field: "id", headerName: "ID", width: 70 },
+    { field: "name", headerName: "Employee Name", width: 200 },
+    { field: "email", headerName: "Email", width: 250 },
+    { field: "department", headerName: "Department", width: 150 },
+    { field: "phone", headerName: "Contact", width: 150 },
+    {
+      field: "status",
+      headerName: "Status",
+      width: 100,
+      renderCell: (params) => {
+        const handleSwitchChange = async (e) => {
+          console.log(params.row.id, e.target.checked, "heheheh");
+          const res = await axiosInstance.post(
+            `user/changeStatus/${params.row.id}`,
+            { val: e.target.checked }
+          );
+        };
+        return (
+          <Switch
+            defaultChecked={params.row.status}
+            onChange={handleSwitchChange}
+          />
+        );
+      },
+    },
+    {
+      field: "details",
+      headerName: "Details",
+      width: 100,
+      renderCell: (params) => {
+        return (
+          <IconButton onClick={()=>{
+            window.open(`/admin/employee/${params.row.id}`)          
+          }} >
+            <Icon icon="bx:link-external"  />
+          </IconButton>
+        );
+      },
+    },
+    {
+      field: "remove",
+      headerName: "REMOVE",
+      width: 100,
+      renderCell: (params) => {
+        return (
+          <IconButton onClick={async()=>{
+            const res = await axiosInstance.post(
+              `user/deleteEmployee`,
+              { id: params.row.id }
+            );
+  
+            if(res.data.ok){
+              enqueueSnackbar(res.data?.message || "Something went wrong", {
+                variant: "success",
+              });
+
+              setChanged(!changed)
+            }
+            else{
+              enqueueSnackbar(res.data?.message || "Something went wrong", {
+                variant: "error",
+              });
+            }
+          }} >
+            <Icon icon="uiw:delete" />
+          </IconButton>
+        );
+      },
+    },
+  ];
+  
+  
+  const formatData = (data) => {
+    const nd = data.map((d) => ({
+      id: d._id,
+      name: d.name,
+      phone: d.phone,
+      department: d.department,
+      email: d.email,
+      status: d.isActive,
+    }));
+  
+    return nd;
+  };
 
   return (
     <MainPage>

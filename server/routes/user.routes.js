@@ -5,6 +5,7 @@ import {
   changeEmployeeStatus,
   editUserProfile,
   getOneEmployee,
+  deleteEmployee
 } from '../controllers/user.controller.js';
 
 import multer from 'multer';
@@ -29,5 +30,7 @@ router.post(
   editUserProfile
 );
 router.get('/employee/:id', authMiddleware, getOneEmployee);
+
+router.post('/deleteEmployee',deleteEmployee)
 
 export default router;
