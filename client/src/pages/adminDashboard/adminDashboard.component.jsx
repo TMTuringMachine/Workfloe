@@ -1,4 +1,4 @@
-import { Typography, Box, Switch } from "@mui/material";
+import { Typography, Box, Switch, Button, IconButton } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { MainPage } from "../../globals/styles";
 import { Icon } from "@iconify/react";
@@ -32,6 +32,20 @@ const columns = [
           defaultChecked={params.row.status}
           onChange={handleSwitchChange}
         />
+      );
+    },
+  },
+  {
+    field: "details",
+    headerName: "Details",
+    width: 100,
+    renderCell: (params) => {
+      return (
+        <IconButton onClick={()=>{
+          window.open(`/admin/employee/${params.row.id}`)          
+        }} >
+          <Icon icon="bx:link-external"  />
+        </IconButton>
       );
     },
   },

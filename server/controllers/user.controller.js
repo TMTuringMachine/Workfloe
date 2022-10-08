@@ -66,3 +66,22 @@ export const editUserProfile = async (req, res) => {
     return res.status(400).send({ message: "Something went wrong!" });
   }
 };
+
+export const getOneEmployee = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id).populate("tasks");
+
+    if (!user) {
+      return res.status(400).send({ ok: false, message: "User not found!" });
+    }
+    return res.status(200).send({
+      ok: true,
+      message: "Employee fetched successfully!",
+      employee: user,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send({ message: "Something went wrong!" });
+  }
+};

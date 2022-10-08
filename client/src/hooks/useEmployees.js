@@ -1,4 +1,4 @@
-import React, { useCallback,useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axiosInstance from "../utils/axiosInstance";
 
@@ -13,6 +13,7 @@ const useEmployees = () => {
   const { enqueueSnackbar } = useSnackbar();
   const { user } = useAuth();
   const [apiloading, setapiloading] = useState(false);
+  const [currentEmployee, setCurrentEmployee] = useState(null);
 
   const getAllEmployees = useCallback(async () => {
     if (pulled) return;
@@ -48,11 +49,26 @@ const useEmployees = () => {
     console.log(res, "edit profile result!");
   }, []);
 
+  const getEmployeeDetails = useCallback(async (id) => {
+    if (currentEmployee != null && id == currentEmployee._id) return;
+    const res = await axiosInstance.get(`/user/employee/${id}`);
+    console.log(res, "employee details!");
+    if (!res.data.ok) {
+      enqueueSnackbar(res.data.message || "Something went wrong!", {
+        variant: "error",
+      });
+      return;
+    }
+    setCurrentEmployee(res.data.employee);
+  }, []);
+
   return {
     getAllEmployees,
     employees,
     editProfile,
     apiloading,
+    getEmployeeDetails,
+    currentEmployee,
   };
 };
 

@@ -4,6 +4,7 @@ import {
   getAllEmployees,
   changeEmployeeStatus,
   editUserProfile,
+  getOneEmployee,
 } from "../controllers/user.controller.js";
 
 import multer from "multer";
@@ -16,5 +17,6 @@ const upload = multer({ storage });
 router.get("/employees", getAllEmployees);
 router.post("/changeStatus/:id", changeEmployeeStatus);
 router.post("/editProfile/:id", upload.single("image"), editUserProfile);
+router.get("/employee/:id", getOneEmployee);
 
 export default router;

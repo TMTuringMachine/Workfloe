@@ -57,6 +57,10 @@ export default function Router() {
           path: "profile",
           element: <Profile />,
         },
+        {
+          path: "employee/:id",
+          element: <EmployeeDetail />,
+        },
       ],
     },
   ]);
@@ -81,4 +85,8 @@ const AdminDashboard = Loadable(
 
 const Profile = Loadable(
   lazy(() => import("../pages/profile/profile.component"))
+);
+
+const EmployeeDetail = Loadable(
+  lazy(() => import("../pages/employeeDetail/employeeDetail.component"))
 );
