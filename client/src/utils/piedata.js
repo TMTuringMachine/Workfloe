@@ -5,8 +5,6 @@ export const getPieData = (tasks, date) => {
   let breaks = 0;
   let works = 0;
 
-  console.log(tasks, date, "eiwefikjwenl");
-    
   tasks.map((t) => {
     const tDate = moment(t.startTime).format("MMM Do YY");
 
@@ -24,4 +22,45 @@ export const getPieData = (tasks, date) => {
   ];
 
   return data;
+};
+
+const days = [
+  "Saturday",
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thrusday",
+  "Friday",
+];
+
+export const getWeekData = (tasks) => {
+  let week = [];
+  let curr = new Date();
+
+  for (let i = 1; i <= 7; i++) {
+    let first = curr.getDate() - curr.getDay() + i;
+    let day = new Date(curr.setDate(first)).toISOString().slice(0, 10);
+    let nd = moment(day).format("MMM Do YY");
+    console.log(curr.getDay(), "jojo");
+    week.push({
+      day: days[curr.getDay()],
+      date: nd,
+    });
+  }
+
+  const nd = [];
+  week.forEach((a) => {
+    let pd = getPieData(tasks, a.date);
+    const ob = {
+      name: a.day,
+      meeting: pd[0].value,
+      break: pd[1].value,
+      work: pd[2].value,
+    };
+    nd.push(ob);
+  });
+
+  console.log(nd, "po");
+  return nd;
 };

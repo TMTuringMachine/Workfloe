@@ -37,6 +37,7 @@ export const Card = styled(Box)(() => ({
   boxShadow: "10px 10px 20px #cbcdce, -10px -10px 20px #ffffff;",
   display: "flex",
   flexDirection: "column",
+  // backgroundColor:"#fff",
   // margin: "1rem",
   // marginTop: "0rem",
   justifyContent: "space-between",

@@ -16,12 +16,11 @@ import {
   ResponsiveContainer,
   Legend,
   Tooltip,
-
 } from "recharts";
 import moment from "moment";
 import PieChartCard from "../employeeDashboard/PieChartCard";
 
-import { getPieData } from "../../utils/piedata";
+import { getPieData, getWeekData } from "../../utils/piedata";
 
 const EmployeeDetail = () => {
   const { id } = useParams();
@@ -31,17 +30,6 @@ const EmployeeDetail = () => {
   var yday = new Date(Date.now() - 864e5);
   const today = moment(new Date()).format("MMM Do YY");
   const yestarday = moment(yday).format("MMM Do YY");
-
-  const data = [
-    { name: "Monday", meeting: 12, break: 23, work: 122 },
-    { name: "Tuesday", meeting: 22, break: 3, work: 73 },
-    { name: "Wednesday", meeting: 13, break: 15, work: 32 },
-    { name: "Thrusday", meeting: 44, break: 35, work: 23 },
-    { name: "Friday", meeting: 35, break: 45, work: 20 },
-    { name: "Saturday", meeting: 62, break: 25, work: 29 },
-    { name: "Sunday", meeting: 37, break: 17, work: 61 },
-  ];
-
 
   useEffect(() => {
     getEmployeeDetails(id);
@@ -114,7 +102,11 @@ const EmployeeDetail = () => {
           <S.ContainerRight>
             <S.BarChartContainer>
               <ResponsiveContainer>
-                <BarChart width="100%" height="100%" data={data}>
+                <BarChart
+                  width="100%"
+                  height="100%"
+                  data={getWeekData(currentEmployee.tasks)}
+                >
                   <CartesianGrid />
                   <XAxis dataKey="name" />
                   <YAxis />
