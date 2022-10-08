@@ -1,5 +1,6 @@
 import { Typography, Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   PieChartStyles,
   RightSide,
@@ -73,7 +74,7 @@ const EmployeeDashboard = () => {
   const [currDayData, setCurrDayData] = useState([{}]);
   const [prevDayData, setPrevDayData] = useState([{}]);
   const data = getTasksCount(user.tasks);
-
+  console.log(user);
   useEffect(() => {
     getTaskAsPerDay(user.tasks, setCurrDayData, setPrevDayData);
   }, []);
@@ -112,11 +113,12 @@ const EmployeeDashboard = () => {
               overflow: 'hidden',
               position: 'relative',
               padding: '0px',
+              marginTop: '-1rem',
             }}
           >
             <img
               style={{ width: '13rem', height: '13rem' }}
-              src={temp}
+              src={user.profilePic.path}
               alt="profile pic"
             />
             <Box
@@ -125,9 +127,11 @@ const EmployeeDashboard = () => {
                 top: '80%',
                 left: '10%',
                 color: 'white',
+                fontWeight: 'bold',
+                fontSize: '1.2rem',
               }}
             >
-              #248
+              #{user._id.slice(-4)}
             </Box>
           </Box>
 

@@ -23,7 +23,7 @@ export const RightSide = styled(Box)(() => ({
 }));
 export const Card = styled(Box)(() => ({
   width: '18rem',
-  height: '12rem',
+  height: '10rem',
   padding: '15px',
   borderRadius: '30px',
   boxShadow: '10px 10px 20px #cbcdce, -10px -10px 20px #ffffff;',
@@ -41,7 +41,7 @@ export const Card = styled(Box)(() => ({
 
 export const BarChartStyles = styled(Box)(() => ({
   width: '100%',
-  height: '98%',
+  height: '90%',
   padding: '15px',
   borderRadius: '30px',
   boxShadow: '10px 10px 20px #cbcdce, -10px -10px 20px #ffffff;',
