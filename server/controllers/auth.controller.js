@@ -64,7 +64,7 @@ export const signup = expressAsyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .send({ ok: true, message: "User created successfully!", token, user });
+    .send({ ok: true, message: "User created successfully!", user });
 });
 
 export const jwtVerify = async (req, res) => {
