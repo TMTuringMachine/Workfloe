@@ -81,7 +81,13 @@ const EmployeeDetail = () => {
               </S.EmployeeInfo>
             </S.EmployeeInfoContainer>
           </S.ContainerLeft>
-          <S.ContainerRight>wkefkjwek</S.ContainerRight>
+          <S.ContainerRight>
+            <S.BarChartContainer>kjwenf</S.BarChartContainer>
+            <S.PieChartsContainer>
+              <S.PieChartContainer>rwkfjw</S.PieChartContainer>
+              <S.PieChartContainer>wkejf</S.PieChartContainer>
+            </S.PieChartsContainer>
+          </S.ContainerRight>
         </S.EmployeeDetailContainer>
       ) : (
         <Typography>loading...</Typography>

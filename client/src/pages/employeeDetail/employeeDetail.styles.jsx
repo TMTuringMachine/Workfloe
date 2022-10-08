@@ -19,6 +19,10 @@ export const ContainerLeft = styled(Box)(() => ({
 export const ContainerRight = styled(Box)(() => ({
   height: "100%",
   flex: 3,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "30px",
 }));
 
 export const EmployeeInfoContainer = styled(Box)(() => ({
@@ -40,10 +44,36 @@ export const EmployeeInfo = styled(Box)(() => ({
   flexDirection: "column",
   marginTop: "20px",
   gap: "15px",
-  '& .flx':{
-    display:'flex',
-    flexDirection:'row',
-    alignItems:'center',
-    gap:'10px'
-  }
+  "& .flx": {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: "10px",
+  },
+}));
+
+export const BarChartContainer = styled(Box)(() => ({
+  width: "100%",
+  borderRadius: "20px",
+  boxShadow: palette.shadow1,
+  backgroundColor: "#fff",
+  padding: "30px",
+  flex: 1,
+}));
+
+export const PieChartsContainer = styled(Box)(() => ({
+  width: "100%",
+  flex: 1,
+  display: "flex",
+  flexDirection: "row",
+  gap:'30px'
+}));
+
+export const PieChartContainer = styled(Box)(() => ({
+  height: "100%",
+  flex: 1,
+  borderRadius: "20px",
+  boxShadow: palette.shadow1,
+  backgroundColor: "#fff",
+  padding:'20px'
 }));
