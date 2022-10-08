@@ -187,8 +187,8 @@ const AdminDashboard = () => {
                 <DataGrid
                   rows={formatData(filteredEmployees)}
                   columns={columns}
-                  pageSize={100}
-                  rowsPerPageOptions={[100]}
+                  pageSize={10}
+                  rowsPerPageOptions={[10]}
                   sx={{
                     backgroundColor: "#fff",
                     border: "none",
