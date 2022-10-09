@@ -1,24 +1,48 @@
-import PieChartComponent from "./PieChart";
-import { Typography, Box } from "@mui/material";
+import PieChartComponent from './PieChart';
+import { Typography, Box } from '@mui/material';
 
 const PieChartCard = ({ data }) => {
+  console.log(data);
+  const [isEmpty, setIsEmpty] = useState(true);
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: NotFound,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
   const COLORS = [
     ["#0088FE", data[0].name],
     ["#00C49F", data[1].name],
     ["#FFBB28", data[2].name],
   ];
+  useEffect(() => {
+    if (
+      data &&
+      data[0].value === 0 &&
+      data[1].value === 0 &&
+      data[2].value === 0
+    ) {
+      setIsEmpty(true);
+      console.log('bruh');
+    } else {
+      setIsEmpty(false);
+    }
+  }, [data]);
 
   return (
     <Box
       sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        width: "100%",
-        height: "100%",
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+        height: '100%',
       }}
     >
-      <Box sx={{ width: "50%", height: "100%" }}>
+      <Box sx={{ width: '50%', height: '100%' }}>
         <PieChartComponent data={data} />
       </Box>
       <Box
