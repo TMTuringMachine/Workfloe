@@ -1,7 +1,7 @@
 import { Box, styled } from "@mui/material";
 import palette from "../../theme/palette";
 
-export const ModalContainer = styled(Box)(() => ({
+export const ModalContainer = styled(Box)(({ theme }) => ({
   position: "absolute",
   width: "60vw",
   height: "70vh",
@@ -15,6 +15,20 @@ export const ModalContainer = styled(Box)(() => ({
   alignItems: "center",
   outline: "none",
   gap: "20px",
+  [theme.breakpoints.down("lg")]: {
+    width: "80vw",
+    left: "10vw",
+  },
+  [theme.breakpoints.down("md")]: {
+    width: "90vw",
+    left: "5vw",
+    height: "80vh",
+    top: "10vh",
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "94vw",
+    left: "3vw",
+  },
 }));
 
 export const CustomDatePicker = styled("input")(() => ({
@@ -29,14 +43,19 @@ export const CustomDatePicker = styled("input")(() => ({
   "&:focus": { outline: "none" },
 }));
 
-export const PieContainer = styled(Box)(() => ({
+export const PieContainer = styled(Box)(({ theme }) => ({
   height: "100%",
   flex: 1,
   // border:`2px solid ${palette.primary}`,
   // borderRadius:'10px',
+  [theme.breakpoints.down("md")]: {
+    height: "50%",
+    width: "100%",
+    flex: 1,
+  },
 }));
 
-export const TasksContainer = styled(Box)(() => ({
+export const TasksContainer = styled(Box)(({ theme }) => ({
   height: "100%",
   flex: 1,
   display: "flex",
@@ -44,6 +63,11 @@ export const TasksContainer = styled(Box)(() => ({
   // padding: "0px 10px",
   // border:`2px solid ${palette.primary}`,
   // borderRadius:'10px',
+  [theme.breakpoints.down("md")]: {
+    height: "50%",
+    width: "100%",
+    flex: 1,
+  },
 }));
 
 export const TaskOverview = styled(Box)(() => ({

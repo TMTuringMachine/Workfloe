@@ -8,6 +8,7 @@ import {
   InputLabel,
   FormControl,
   Box,
+  useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
 import { CustomButton } from "../../globals/styles";
@@ -27,6 +28,7 @@ const EmployeeDetailsModal = ({ state, toggleModal, tasks }) => {
   const [date, setDate] = useState(null);
   const [dayTasks, setDayTasks] = useState([]);
   const [pieData, setPieData] = useState(null);
+  const { breakpoints } = useTheme();
 
   const handleChange = (e) => {
     setDate(e.target.value);
@@ -70,12 +72,15 @@ const EmployeeDetailsModal = ({ state, toggleModal, tasks }) => {
               display: "flex",
               gap: "20px",
               maxHeight: "80%",
+              [breakpoints.down("md")]: {
+                flexDirection: "column",
+              },
             }}
           >
             <PieContainer>
               <Typography sx={{ fontWeight: 700 }}>Pie Chart:</Typography>
               {date != null ? (
-                <Box sx={{width:'100%',height:'100%'}} >
+                <Box sx={{ width: "100%", height: "100%" }}>
                   <PieChartCard data={pieData} />
                 </Box>
               ) : null}
