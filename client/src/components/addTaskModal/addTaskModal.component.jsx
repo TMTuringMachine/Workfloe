@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { CustomButton } from "../../globals/styles";
-import { ModalContainer } from "./addTaskModal.styles";
+import { ModalContainer, CustomDateInput } from "./addTaskModal.styles";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useTask from "../../hooks/useTask";
@@ -34,14 +34,16 @@ const AddTaskModal = ({ state, toggleModal }) => {
     // registerClient(data, toggleModal);
   };
 
-  const maxDate = ()=>{
-    var today,dd,mm,yyyy;
+  const maxDate = () => {
+    var today, dd, mm, yyyy;
     today = new Date();
-    dd = today.getDate()+1;
-    mm = today.getMonth()+1;
+    dd = today.getDate();
+    mm = today.getMonth() + 1;
     yyyy = today.getFullYear();
-    return yyyy+"-"+mm+"-"+dd
-  }
+    if (mm < 10) mm = "0" + mm.toString();
+    if (dd < 10) dd = "0" + dd.toString();
+    return yyyy + "-" + mm + "-" + dd;
+  };
 
   return (
     <Modal open={state} onClose={toggleModal}>
@@ -91,7 +93,12 @@ const AddTaskModal = ({ state, toggleModal }) => {
             }}
           >
             <Typography>Start time:</Typography>
-            <input max={maxDate()} onChange={handleChange} name="startTime" type="date" />
+            <CustomDateInput
+              max={maxDate()}
+              onChange={handleChange}
+              name="startTime"
+              type="date"
+            />
           </Box>
           <TextField
             name="duration"

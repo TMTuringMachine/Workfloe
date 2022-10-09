@@ -27,7 +27,7 @@ export const getPieData = (tasks, date) => {
 export const getTasksFromDate = (tasks, date) => {
   const nd = moment(date).format("MMM Do YY");
   let newtasks = [];
-  console.log(tasks, "here are the tasks!", date,nd);
+  console.log(tasks, "here are the tasks!", date, nd);
   tasks.map((t) => {
     const tDate = moment(t.startTime).format("MMM Do YY");
 
@@ -40,20 +40,20 @@ export const getTasksFromDate = (tasks, date) => {
 };
 
 const days = [
-  "Saturday",
   "Sunday",
   "Monday",
   "Tuesday",
   "Wednesday",
   "Thrusday",
   "Friday",
+  "Saturday",
 ];
 
 export const getWeekData = (tasks) => {
   let week = [];
   let curr = new Date();
 
-  for (let i = 1; i <= 7; i++) {
+  for (let i = 0; i < 7; i++) {
     let first = curr.getDate() - curr.getDay() + i;
     let day = new Date(curr.setDate(first)).toISOString().slice(0, 10);
     let nd = moment(day).format("MMM Do YY");
@@ -64,6 +64,8 @@ export const getWeekData = (tasks) => {
     });
   }
 
+  console.log(week, "this is the weeeek");
+
   const nd = [];
   week.forEach((a) => {
     let pd = getPieData(tasks, a.date);
@@ -73,6 +75,7 @@ export const getWeekData = (tasks) => {
       break: pd[1].value,
       work: pd[2].value,
     };
+    console.log(nd, "opopopopopopopo");
     nd.push(ob);
   });
 

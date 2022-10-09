@@ -317,9 +317,9 @@ const EmployeeDashboard = () => {
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="meeting" stackId="a" fill="#6F6AF8" />
-                  <Bar dataKey="break" stackId="a" fill="#9523db" />
-                  <Bar dataKey="work" stackId="a" fill="#23dbde" />
+                  <Bar dataKey="meeting" stackId="a" fill="#0088FE" />
+                  <Bar dataKey="break" stackId="a" fill="#00C49F" />
+                  <Bar dataKey="work" stackId="a" fill="#FFBB28" />
                 </BarChart>
               </ResponsiveContainer>
             </BarChartStyles>

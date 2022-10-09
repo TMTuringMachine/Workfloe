@@ -29,10 +29,25 @@ const slice = createSlice({
       state = { ...action.payload, isLoggedIn: true };
       return state;
     },
+    addTaskSuccess(state, action) {
+      const { task } = action.payload;
+      const user = {
+        ...state.user,
+        tasks: [...state.user.tasks, task],
+      };
+      state.user = user;
+      return state;
+    },
   },
 });
 
-export const { registerSuccess, loginSuccess, initialize, logoutSuccess,editProfileSuccess } =
-  slice.actions;
+export const {
+  registerSuccess,
+  loginSuccess,
+  initialize,
+  logoutSuccess,
+  editProfileSuccess,
+  addTaskSuccess,
+} = slice.actions;
 
 export default slice.reducer;
