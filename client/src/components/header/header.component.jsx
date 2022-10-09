@@ -1,4 +1,11 @@
-import { Avatar, Box, Typography, Popover, Button } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Typography,
+  Popover,
+  Button,
+  useTheme,
+} from "@mui/material";
 import React, { useState } from "react";
 import palette from "../../theme/palette";
 import { Icon } from "@iconify/react";
@@ -10,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 const Header = () => {
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const { breakpoints } = useTheme();
 
   const navigate = useNavigate();
 
@@ -56,6 +64,10 @@ const Header = () => {
             sx={{
               backgroundColor: "#fff",
               "&:hover": { backgroundColor: "#fff" },
+              [breakpoints.down("md")]:{
+                padding:"5px 7px",
+                fontSize:"0.7em"
+              }
             }}
             onClick={toggleTaskModal}
           >

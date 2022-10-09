@@ -1,6 +1,6 @@
 import { styled, Box } from "@mui/material";
 import palette from "../../theme/palette";
-export const PieChartStyles = styled(Box)(() => ({
+export const PieChartStyles = styled(Box)(({theme}) => ({
   // width: "24rem",
   width: "100%",
   height: "14rem",
@@ -13,8 +13,14 @@ export const PieChartStyles = styled(Box)(() => ({
   justifyContent: "center",
   alignItems: "center",
   // margin: "1rem",
+  [theme.breakpoints.down("md")]:{
+    borderRadius:"20px",
+  },
+  [theme.breakpoints.down("md")]:{
+    borderRadius:"10px",
+  },
 }));
-export const RightSide = styled(Box)(() => ({
+export const RightSide = styled(Box)(({ theme }) => ({
   // width: "fit-content",
   // maxWidth:"68vw",
   flex: 1,
@@ -26,12 +32,18 @@ export const RightSide = styled(Box)(() => ({
   flexDirection: "column",
   padding: "0px 10px",
   gap: "30px",
+  [theme.breakpoints.down("md")]: {
+    height: "50vh",
+  },
+  [theme.breakpoints.down("sm")]: {
+    height: "30vh",
+  },
 }));
-export const Card = styled(Box)(() => ({
+export const Card = styled(Box)(({ theme }) => ({
   // width: "18rem",
   flex: 1,
   // height: "10rem",
-  height:"100%",
+  height: "100%",
   padding: "15px",
   borderRadius: "30px",
   boxShadow: "10px 10px 20px #cbcdce, -10px -10px 20px #ffffff;",
@@ -47,9 +59,15 @@ export const Card = styled(Box)(() => ({
   "&:hover": {
     transform: "scale(1.04)",
   },
+  [theme.breakpoints.down("md")]:{
+    borderRadius:"20px",
+  },
+  [theme.breakpoints.down("md")]:{
+    borderRadius:"10px",
+  },
 }));
 
-export const BarChartStyles = styled(Box)(() => ({
+export const BarChartStyles = styled(Box)(({ theme }) => ({
   width: "100%",
   flex: 1,
   padding: "15px",
@@ -57,4 +75,14 @@ export const BarChartStyles = styled(Box)(() => ({
   boxShadow: "10px 10px 20px #cbcdce, -10px -10px 20px #ffffff;",
   display: "flex",
   flexDirection: "column",
+  [theme.breakpoints.down("md")]: {
+    height: "50vh",
+    maxHeight: "50vh",
+    borderRadius: "20px",
+  },
+  [theme.breakpoints.down("md")]: {
+    height: "40vh",
+    maxHeight: "40vh",
+    borderRadius: "10px",
+  },
 }));

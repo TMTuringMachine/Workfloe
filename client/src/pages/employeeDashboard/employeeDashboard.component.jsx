@@ -1,4 +1,4 @@
-import { Typography, Box, Avatar } from "@mui/material";
+import { Typography, Box, Avatar, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
   PieChartStyles,
@@ -37,84 +37,43 @@ const getTasksCount = (tasks) => {
   };
 };
 
-const minToHours = (mins)=>{
-  var hours = Math.trunc(mins/60);
+const minToHours = (mins) => {
+  var hours = Math.trunc(mins / 60);
   var minutes = mins % 60;
-  return hours +"."+ minutes;
-}
+  return hours + "." + minutes;
+};
 
-const getTaskDuration = (tasks)=>{
-  var meeting=0
-  var work=0
-  var totalbreak=0;
+const getTaskDuration = (tasks) => {
+  var meeting = 0;
+  var work = 0;
+  var totalbreak = 0;
   // console.log(tasks)
-  for(var i=0;i<tasks.length;i++){
-      if(tasks[i].category==='work'){
-        work+=tasks[i].duration
-      }else if(tasks[i].category==='break'){
-        totalbreak+=tasks[i].duration
-      }else if(tasks[i].category==='meeting'){
-        meeting+=tasks[i].duration
-      }
+  for (var i = 0; i < tasks.length; i++) {
+    if (tasks[i].category === "work") {
+      work += tasks[i].duration;
+    } else if (tasks[i].category === "break") {
+      totalbreak += tasks[i].duration;
+    } else if (tasks[i].category === "meeting") {
+      meeting += tasks[i].duration;
+    }
   }
 
   return {
-    meeting:minToHours(meeting),work:minToHours(work),totalbreak:minToHours(totalbreak)
-  }
-
-}
-
-// const getTaskAsPerDay = (tasks, setCurrDayData, setPrevDayData) => {
-//   var yesterday = new Date(Date.now() - 864e5);
-//   const cDate = moment(new Date()).format("MMM Do YY");
-//   const yDate = moment(yesterday).format("MMM Do YY");
-
-//   let meetings = 0;
-//   let breaks = 0;
-//   let works = 0;
-//   const currDay = tasks.map((t) => {
-//     const tDate = moment(t.startTime).format("MMM Do YY");
-
-//     if (tDate === cDate) {
-//       meetings += t.category === "meeting" ? parseInt(t.duration) : 0;
-//       breaks += t.category === "break" ? parseInt(t.duration) : 0;
-//       works += t.category === "work" ? parseInt(t.duration) : 0;
-//     }
-//   });
-
-//   setCurrDayData([
-//     { name: "meetings", value: meetings },
-//     { name: "break", value: breaks },
-//     { name: "works", value: works },
-//   ]);
-//   meetings = 0;
-//   breaks = 0;
-//   works = 0;
-//   const prevDay = tasks.map((t) => {
-//     const tDate = moment(t.startTime).format("MMM Do YY");
-
-//     if (tDate === yDate) {
-//       meetings += t.category === "meeting" ? parseInt(t.duration) : 0;
-//       breaks += t.category === "break" ? parseInt(t.duration) : 0;
-//       works += t.category === "work" ? parseInt(t.duration) : 0;
-//     }
-//   });
-
-//   setPrevDayData([
-//     { name: "meetings", value: meetings },
-//     { name: "break", value: breaks },
-//     { name: "works", value: works },
-//   ]);
-// };
+    meeting: minToHours(meeting),
+    work: minToHours(work),
+    totalbreak: minToHours(totalbreak),
+  };
+};
 
 const EmployeeDashboard = () => {
   const { user } = useAuth();
   const data = getTasksCount(user.tasks);
-  const duration = getTaskDuration(user.tasks)
+  const duration = getTaskDuration(user.tasks);
   var yesterday = new Date(Date.now() - 864e5);
   const cDate = moment(new Date()).format("MMM Do YY");
   const yDate = moment(yesterday).format("MMM Do YY");
   const [showDateModal, setShowDateModal] = useState(false);
+  const { breakpoints } = useTheme();
 
   const toggleDateModal = () => {
     setShowDateModal(!showDateModal);
@@ -145,11 +104,16 @@ const EmployeeDashboard = () => {
               fontSize: "2em",
               letterSpacing: "2px",
               fontWeight: 600,
+              [breakpoints.down("md")]: {
+                fontSize: "1.2em",
+              },
             }}
           >
             Good Morning, {user?.name}!
           </Typography>
-          <CustomButton onClick={toggleDateModal}>FILTER BY DATE</CustomButton>
+          <CustomButton onClick={toggleDateModal} size="small">
+            FILTER BY DATE
+          </CustomButton>
           <EmployeeDetailsModal
             state={showDateModal}
             toggleModal={toggleDateModal}
@@ -162,17 +126,23 @@ const EmployeeDashboard = () => {
             width: "100%",
             flex: 1,
             gap: "25px",
+            [breakpoints.down("md")]: {
+              flexDirection: "column-reverse",
+            },
           }}
         >
           <Box
             sx={{
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "space-between",
               alignItems: "center",
               flexDirection: "column",
               width: "fit-content",
               gap: "1.5rem",
               width: "25%",
+              [breakpoints.down("md")]: {
+                width: "100%",
+              },
             }}
           >
             <Box
@@ -185,6 +155,12 @@ const EmployeeDashboard = () => {
                 borderRadius: "20px",
                 display: "flex",
                 gap: "20px",
+                [breakpoints.down("md")]:{
+                  borderRadius:"15px",
+                },
+                [breakpoints.down("md")]:{
+                  borderRadius:"10px",
+                },
               }}
             >
               <Avatar
@@ -239,6 +215,12 @@ const EmployeeDashboard = () => {
                 width: "100%",
                 gap: "1.5rem",
                 height: "25%",
+                [breakpoints.down("md")]: {
+                  height: "50%",
+                },
+                [breakpoints.down("sm")]: {
+                  height: "35%",
+                },
               }}
             >
               <Card>
@@ -248,17 +230,34 @@ const EmployeeDashboard = () => {
                   height="40px"
                   color="black"
                 />
-                <Typography sx={{ fontSize: "1.2rem", fontWeight: "bold" }}>
-                  {duration.meeting ? duration.meeting:null} Hours
-                </Typography>
                 <Typography
                   sx={{
                     fontSize: "1.5rem",
                     fontWeight: "bold",
-                    color: "#888FA3",
+                    [breakpoints.down("md")]: {
+                      fontSize: "1.3em",
+                    },
+                    [breakpoints.down("md")]: {
+                      fontSize: "1.1em",
+                    },
                   }}
                 >
-                  Meeting Attended
+                  {duration.meeting ? duration.meeting : null}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "1.2rem",
+                    fontWeight: "bold",
+                    color: "#888FA3",
+                    [breakpoints.down("md")]: {
+                      fontSize: "1em",
+                    },
+                    [breakpoints.down("md")]: {
+                      fontSize: "0.8em",
+                    },
+                  }}
+                >
+                  Meeting hours
                 </Typography>
               </Card>
 
@@ -269,17 +268,34 @@ const EmployeeDashboard = () => {
                   height="40px"
                   color="black"
                 />
-                 <Typography sx={{ fontSize: "1.2rem", fontWeight: "bold" }}>
-                  {duration.work ? duration.work:null} Hours
-                </Typography>
                 <Typography
                   sx={{
                     fontSize: "1.5rem",
                     fontWeight: "bold",
-                    color: "#888FA3",
+                    [breakpoints.down("md")]: {
+                      fontSize: "1.3em",
+                    },
+                    [breakpoints.down("md")]: {
+                      fontSize: "1.1em",
+                    },
                   }}
                 >
-                  Work Done
+                  {duration.work ? duration.work : null}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "1.2rem",
+                    fontWeight: "bold",
+                    color: "#888FA3",
+                    [breakpoints.down("md")]: {
+                      fontSize: "1em",
+                    },
+                    [breakpoints.down("md")]: {
+                      fontSize: "0.8em",
+                    },
+                  }}
+                >
+                  Work hours
                 </Typography>
               </Card>
 
@@ -290,17 +306,34 @@ const EmployeeDashboard = () => {
                   height="40px"
                   color="black"
                 />
-                <Typography sx={{ fontSize: "1.2rem", fontWeight: "bold" }}>
-                  {duration.totalbreak ? duration.totalbreak:null} Hours
-                </Typography>
                 <Typography
                   sx={{
                     fontSize: "1.5rem",
                     fontWeight: "bold",
-                    color: "#888FA3",
+                    [breakpoints.down("md")]: {
+                      fontSize: "1.3em",
+                    },
+                    [breakpoints.down("md")]: {
+                      fontSize: "1.1em",
+                    },
                   }}
                 >
-                  Took Break
+                  {duration.totalbreak ? duration.totalbreak : null}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: "1.2rem",
+                    fontWeight: "bold",
+                    color: "#888FA3",
+                    [breakpoints.down("md")]: {
+                      fontSize: "1em",
+                    },
+                    [breakpoints.down("md")]: {
+                      fontSize: "0.8em",
+                    },
+                  }}
+                >
+                  Break hours
                 </Typography>
               </Card>
             </Box>

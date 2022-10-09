@@ -19,12 +19,18 @@ export const FlexRow = styled(Box)(() => ({
   gap: "30px",
 }));
 
-export const CustomSearchBar = styled("input")(() => ({
+export const CustomSearchBar = styled("input")(({theme}) => ({
   width: "50vw",
   outline: "none",
   padding: "8px 20px",
   borderRadius: "5px",
   border: "none",
+  [theme.breakpoints.down("lg")]:{
+    width:"40vw"
+  },
+  [theme.breakpoints.down("md")]:{
+    width:"30vw"
+  }
 }));
 
 export const HeaderMenu = styled(Box)(() => ({

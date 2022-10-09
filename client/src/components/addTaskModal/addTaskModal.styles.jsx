@@ -1,7 +1,7 @@
 import { Box, styled } from "@mui/material";
 import palette from "../../theme/palette";
 
-export const ModalContainer = styled(Box)(() => ({
+export const ModalContainer = styled(Box)(({theme}) => ({
   position: "absolute",
   width: "40vw",
   height: "fit-content",
@@ -15,6 +15,18 @@ export const ModalContainer = styled(Box)(() => ({
   alignItems: "center",
   outline: "none",
   gap: "20px",
+  [theme.breakpoints.down("lg")]: {
+    width: "60vw",
+    left: "20vw",
+  },
+  [theme.breakpoints.down("md")]: {
+    width: "80vw",
+    left: "10vw",
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "90vw",
+    left: "5vw",
+  },
 }));
 
 export const CustomDateInput = styled("input")(() => ({
