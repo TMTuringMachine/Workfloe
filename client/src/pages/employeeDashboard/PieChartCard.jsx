@@ -1,5 +1,9 @@
+import { useEffect, useState } from 'react';
 import PieChartComponent from './PieChart';
 import { Typography, Box } from '@mui/material';
+import Lottie from 'react-lottie';
+import * as S from '../login/login.styles.jsx';
+import NotFound from '../../assets/notFound.json';
 
 const PieChartCard = ({ data }) => {
   console.log(data);
@@ -14,9 +18,9 @@ const PieChartCard = ({ data }) => {
     },
   };
   const COLORS = [
-    ["#0088FE", data[0].name],
-    ["#00C49F", data[1].name],
-    ["#FFBB28", data[2].name],
+    ['#0088FE', data[0].name],
+    ['#00C49F', data[1].name],
+    ['#FFBB28', data[2].name],
   ];
   useEffect(() => {
     if (
@@ -32,7 +36,20 @@ const PieChartCard = ({ data }) => {
     }
   }, [data]);
 
-  return (
+  return isEmpty ? (
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '2rem',
+      }}
+    >
+      <S.LottieContainer>
+        <Lottie options={defaultOptions} height="100%" width="80%" />
+      </S.LottieContainer>
+    </Box>
+  ) : (
     <Box
       sx={{
         display: 'flex',
@@ -47,30 +64,30 @@ const PieChartCard = ({ data }) => {
       </Box>
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          width: "40%",
-          height: "70%",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          width: '40%',
+          height: '70%',
         }}
       >
         {COLORS.map((c) => (
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              width: "100%",
-              height: "100%",
+              display: 'flex',
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              width: '100%',
+              height: '100%',
             }}
           >
             <Box
               sx={{
                 backgroundColor: c[0],
-                width: "1rem",
-                height: "1rem",
-                marginRight: "0.4rem",
+                width: '1rem',
+                height: '1rem',
+                marginRight: '0.4rem',
               }}
             ></Box>
             <Box>{c[1]}</Box>
