@@ -1,4 +1,4 @@
-import { Avatar, Typography, Box } from "@mui/material";
+import { Avatar, Typography, Box, useTheme } from "@mui/material";
 import React, { useState } from "react";
 
 import { MainPage } from "../../globals/styles";
@@ -12,6 +12,7 @@ const Profile = () => {
   const { user } = useAuth();
   const [showEditModal, setShowEditModal] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const { breakpoints } = useTheme();
 
   const toggleEditModal = () => {
     setShowEditModal(!showEditModal);
@@ -26,7 +27,22 @@ const Profile = () => {
       <S.ProfileContainer>
         <S.ProfileCard>
           <Avatar
-            sx={{ width: "150px", height: "150px" }}
+            sx={{
+              width: "150px",
+              height: "150px",
+              [breakpoints.down("lg")]: {
+                width: "120px",
+                height: "120px",
+              },
+              [breakpoints.down("md")]: {
+                width: "100px",
+                height: "100px",
+              },
+              [breakpoints.down("sm")]: {
+                width: "80px",
+                height: "80px",
+              },
+            }}
             src={user?.profilePic?.path}
           />
           <Box

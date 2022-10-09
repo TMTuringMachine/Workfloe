@@ -1,6 +1,6 @@
 import { Box, styled } from "@mui/material";
 
-export const ModalContainer = styled(Box)(() => ({
+export const ModalContainer = styled(Box)(({theme}) => ({
   position: "absolute",
   width: "30vw",
   height: "fit-content",
@@ -13,5 +13,17 @@ export const ModalContainer = styled(Box)(() => ({
   flexDirection: "column",
   alignItems: "center",
   outline: 'none',
-  gap:'20px'
+  gap:'20px',
+  [theme.breakpoints.down("lg")]: {
+    width: "50vw",
+    left: "25vw",
+  },
+  [theme.breakpoints.down("md")]: {
+    width: "70vw",
+    left: "15vw",
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "90vw",
+    left: "5vw",
+  },
 }));

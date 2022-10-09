@@ -9,7 +9,7 @@ export const ProfileContainer = styled(Box)(() => ({
   alignItems: "center",
 }));
 
-export const ProfileCard = styled(Box)(() => ({
+export const ProfileCard = styled(Box)(({ theme }) => ({
   width: "40%",
   height: "fit-content",
   padding: "30px 30px",
@@ -20,4 +20,15 @@ export const ProfileCard = styled(Box)(() => ({
   gap: "30px",
   alignItems: "center",
   backgroundColor: "#fff",
+  [theme.breakpoints.down("lg")]: {
+    width: "60%",
+  },
+  [theme.breakpoints.down("md")]: {
+    width: "80%",
+    borderRadius: "20px",
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+    borderRadius: "10px",
+  },
 }));
