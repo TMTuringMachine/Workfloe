@@ -24,6 +24,7 @@ import {
 } from "recharts";
 import { CustomButton, MainPage } from "../../globals/styles";
 import EmployeeDetailsModal from "../../components/employeeDetailModal/employeeDetailModa.component";
+import CountUp from "react-countup";
 
 const getTasksCount = (tasks) => {
   const meetings = tasks.filter((a) => a.category == "meeting").length;
@@ -59,9 +60,9 @@ const getTaskDuration = (tasks) => {
   }
 
   return {
-    meeting: minToHours(meeting),
-    work: minToHours(work),
-    totalbreak: minToHours(totalbreak),
+    meeting: meeting,
+    work: work,
+    totalbreak: totalbreak,
   };
 };
 
@@ -155,11 +156,11 @@ const EmployeeDashboard = () => {
                 borderRadius: "20px",
                 display: "flex",
                 gap: "20px",
-                [breakpoints.down("md")]:{
-                  borderRadius:"15px",
+                [breakpoints.down("md")]: {
+                  borderRadius: "15px",
                 },
-                [breakpoints.down("md")]:{
-                  borderRadius:"10px",
+                [breakpoints.down("md")]: {
+                  borderRadius: "10px",
                 },
               }}
             >
@@ -242,7 +243,10 @@ const EmployeeDashboard = () => {
                     },
                   }}
                 >
-                  {duration.meeting ? duration.meeting : null}
+                  <CountUp
+                    end={duration.meeting ? duration.meeting : 0}
+                    duration={1.5}
+                  />
                 </Typography>
                 <Typography
                   sx={{
@@ -257,7 +261,7 @@ const EmployeeDashboard = () => {
                     },
                   }}
                 >
-                  Meeting hours
+                  Meeting miniutes
                 </Typography>
               </Card>
 
@@ -280,7 +284,10 @@ const EmployeeDashboard = () => {
                     },
                   }}
                 >
-                  {duration.work ? duration.work : null}
+                  <CountUp
+                    end={duration.work ? duration.work : 0}
+                    duration={1.5}
+                  />
                 </Typography>
                 <Typography
                   sx={{
@@ -295,7 +302,7 @@ const EmployeeDashboard = () => {
                     },
                   }}
                 >
-                  Work hours
+                  Work miniutes
                 </Typography>
               </Card>
 
@@ -318,7 +325,10 @@ const EmployeeDashboard = () => {
                     },
                   }}
                 >
-                  {duration.totalbreak ? duration.totalbreak : null}
+                  <CountUp
+                    end={duration.totalbreak ? duration.totalbreak : 0}
+                    duration={1.5}
+                  />
                 </Typography>
                 <Typography
                   sx={{
@@ -333,7 +343,7 @@ const EmployeeDashboard = () => {
                     },
                   }}
                 >
-                  Break hours
+                  Break miniutes
                 </Typography>
               </Card>
             </Box>

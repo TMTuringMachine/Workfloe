@@ -16,6 +16,10 @@ import useEmployees from "../../hooks/useEmployees";
 import AddEmployeeModal from "../../components/addEmployeeModal/addEmployeeModal.component";
 import axiosInstance from "../../utils/axiosInstance";
 import { useSnackbar } from "notistack";
+import PieModal from "../../components/pieModal/pieModal.component";
+import useTask from "../../hooks/useTask";
+import { getTasksPieData, getEmployeePieData } from "../../utils/piedata";
+import CountUp from "react-countup";
 
 const AdminDashboard = () => {
   const { getAllEmployees, employees } = useEmployees();
@@ -25,13 +29,25 @@ const AdminDashboard = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [changed, setChanged] = useState(false);
   const { breakpoints } = useTheme();
+  const [showTasksModal, setShowTasksModal] = useState(false);
+  const [showEmployeeModal, setShowEmployeeModal] = useState(false);
+  const { getAllTasks, tasks } = useTask();
 
   const toggleAddModal = () => {
     setShowAddModal(!showAddModal);
   };
 
+  const toggleTaskModal = () => {
+    setShowTasksModal(!showTasksModal);
+  };
+
+  const toggleEmployeeModal = () => {
+    setShowEmployeeModal(!showEmployeeModal);
+  };
+
   useEffect(() => {
     getAllEmployees();
+    getAllTasks();
   }, [changed]);
 
   useEffect(() => {
@@ -162,7 +178,7 @@ const AdminDashboard = () => {
         <S.DashboardRow>
           <S.DashboardLeft>
             <S.StatsContainer>
-              <S.StatCard>
+              <S.StatCard onClick={toggleEmployeeModal}>
                 <Box
                   sx={{
                     width: "100%",
@@ -184,13 +200,26 @@ const AdminDashboard = () => {
                   />
                 </Box>
                 <Typography sx={{ fontSize: "2em", fontWeight: 700 }}>
-                  {employees?.length || 0}
+                  <CountUp end={employees.length || 0} duration={1} />
+                  {/* {employees?.length || 0} */}
                 </Typography>
                 <Typography sx={{ fontWeight: 600, color: palette.primary }}>
                   employees
                 </Typography>
               </S.StatCard>
-              <S.StatCard>
+              <PieModal
+                state={showTasksModal}
+                toggleModal={toggleTaskModal}
+                data={getTasksPieData(tasks)}
+                header="TASKS DISTRIBUTION PIE"
+              />
+              <PieModal
+                state={showEmployeeModal}
+                toggleModal={toggleEmployeeModal}
+                data={getEmployeePieData(employees)}
+                header="EMPLOYEE DISTRIBUTION PIE"
+              />
+              <S.StatCard onClick={toggleTaskModal}>
                 <Box
                   sx={{
                     width: "100%",
@@ -212,7 +241,7 @@ const AdminDashboard = () => {
                   />
                 </Box>
                 <Typography sx={{ fontSize: "2em", fontWeight: 700 }}>
-                  540
+                <CountUp end={tasks.length || 0} duration={1} />
                 </Typography>
                 <Typography sx={{ fontWeight: 600, color: palette.primary }}>
                   tasks
