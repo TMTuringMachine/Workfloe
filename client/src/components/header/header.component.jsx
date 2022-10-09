@@ -38,7 +38,15 @@ const Header = () => {
   const id = open ? 'simple-popover' : undefined;
   return (
     <S.HeaderContainer>
-      <S.FlexRow>
+      <S.FlexRow
+        onClick={() => {
+          if (user.isAdmin) {
+            navigate('/admin/home');
+          } else {
+            navigate('/employee/home');
+          }
+        }}
+      >
         <Icon
           icon="game-icons:air-zigzag"
           className="logo"
@@ -52,13 +60,6 @@ const Header = () => {
             fontWeight: 700,
             color: palette.surface,
             cursor: 'pointer',
-          }}
-          onClick={() => {
-            if (user.isAdmin) {
-              navigate('/admin/home');
-            } else {
-              navigate('/employee/home');
-            }
           }}
         >
           workfloe

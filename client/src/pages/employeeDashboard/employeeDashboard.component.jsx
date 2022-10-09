@@ -160,7 +160,8 @@ const EmployeeDashboard = () => {
               },
             }}
           >
-            Good Morning, {user?.name}!
+            Good Morning, <u style={{ color: palette.primary }}>{user?.name}</u>
+            !
           </Typography>
           <CustomButton onClick={toggleDateModal} size="small">
             FILTER BY DATE
@@ -221,7 +222,7 @@ const EmployeeDashboard = () => {
               <Box
                 sx={{ display: "flex", flexDirection: "column", gap: "5px" }}
               >
-                <Typography sx={{ fontWeight: 700, fontSize: "1.2em" }}>
+                <Typography sx={{ fontWeight: 600, fontSize: '1.2em' }}>
                   {user?.name}
                 </Typography>
                 <Typography sx={{ fontSize: "0.8em", color: "#7e7e7e" }}>
