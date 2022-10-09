@@ -19,3 +19,6 @@ html {
   margin: 0px;
   box-sizing: border-box;
 }
+.MuiTypography-root{
+  font-family: 'Poppins' !important;
+}
