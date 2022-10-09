@@ -1,4 +1,11 @@
-import { Typography, Box, Switch, Button, IconButton } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Switch,
+  Button,
+  IconButton,
+  useTheme,
+} from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { MainPage } from "../../globals/styles";
 import { Icon } from "@iconify/react";
@@ -10,17 +17,14 @@ import AddEmployeeModal from "../../components/addEmployeeModal/addEmployeeModal
 import axiosInstance from "../../utils/axiosInstance";
 import { useSnackbar } from "notistack";
 
-
-
-
 const AdminDashboard = () => {
   const { getAllEmployees, employees } = useEmployees();
   const [showAddModal, setShowAddModal] = useState(false);
   const [filteredEmployees, setFileteredEmployees] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const { enqueueSnackbar } = useSnackbar();
-  const [changed,setChanged] = useState(false);
-
+  const [changed, setChanged] = useState(false);
+  const { breakpoints } = useTheme();
 
   const toggleAddModal = () => {
     setShowAddModal(!showAddModal);
@@ -87,10 +91,12 @@ const AdminDashboard = () => {
       width: 100,
       renderCell: (params) => {
         return (
-          <IconButton onClick={()=>{
-            window.open(`/admin/employee/${params.row.id}`)          
-          }} >
-            <Icon icon="bx:link-external"  />
+          <IconButton
+            onClick={() => {
+              window.open(`/admin/employee/${params.row.id}`);
+            }}
+          >
+            <Icon icon="bx:link-external" />
           </IconButton>
         );
       },
@@ -101,33 +107,32 @@ const AdminDashboard = () => {
       width: 100,
       renderCell: (params) => {
         return (
-          <IconButton onClick={async()=>{
-            const res = await axiosInstance.post(
-              `user/deleteEmployee`,
-              { id: params.row.id }
-            );
-  
-            if(res.data.ok){
-              enqueueSnackbar(res.data?.message || "Something went wrong", {
-                variant: "success",
+          <IconButton
+            onClick={async () => {
+              const res = await axiosInstance.post(`user/deleteEmployee`, {
+                id: params.row.id,
               });
 
-              setChanged(!changed)
-            }
-            else{
-              enqueueSnackbar(res.data?.message || "Something went wrong", {
-                variant: "error",
-              });
-            }
-          }} >
+              if (res.data.ok) {
+                enqueueSnackbar(res.data?.message || "Something went wrong", {
+                  variant: "success",
+                });
+
+                setChanged(!changed);
+              } else {
+                enqueueSnackbar(res.data?.message || "Something went wrong", {
+                  variant: "error",
+                });
+              }
+            }}
+          >
             <Icon icon="uiw:delete" />
           </IconButton>
         );
       },
     },
   ];
-  
-  
+
   const formatData = (data) => {
     const nd = data.map((d) => ({
       id: d._id,
@@ -137,7 +142,7 @@ const AdminDashboard = () => {
       email: d.email,
       status: d.isActive,
     }));
-  
+
     return nd;
   };
 
@@ -145,7 +150,12 @@ const AdminDashboard = () => {
     <MainPage>
       <S.DashboardContainer>
         <Typography
-          sx={{ fontSize: "2em", letterSpacing: "2px", fontWeight: 600 }}
+          sx={{
+            fontSize: "2em",
+            letterSpacing: "2px",
+            fontWeight: 600,
+            [breakpoints.down("md")]: { fontSize: "1.5em" },
+          }}
         >
           Workfloe admin console
         </Typography>

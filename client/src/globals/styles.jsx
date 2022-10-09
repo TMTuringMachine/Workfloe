@@ -14,9 +14,15 @@ export const CustomButton = styled(Button)(() => ({
   },
 }));
 
-export const MainPage = styled(Box)(() => ({
+export const MainPage = styled(Box)(({ theme }) => ({
   width: "100vw",
   height: "100%",
   backgroundColor: palette.backgrond1,
-  padding:'30px'
+  padding: "30px",
+  [theme.breakpoints.down("lg")]: {
+    padding: "20px",
+  },
+  [theme.breakpoints.down("md")]: {
+    padding: "15px",
+  },
 }));

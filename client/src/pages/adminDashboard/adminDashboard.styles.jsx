@@ -8,16 +8,23 @@ export const DashboardContainer = styled(Box)(() => ({
   flexDirection: "column",
 }));
 
-export const DashboardRow = styled(Box)(() => ({
+export const DashboardRow = styled(Box)(({ theme }) => ({
   width: "100%",
   flex: 1,
   marginTop: "20px",
   display: "flex",
+  [theme.breakpoints.down("md")]: {
+    flexDirection: "column-reverse",
+    gap: "30px",
+  },
 }));
 
-export const DashboardLeft = styled(Box)(() => ({
+export const DashboardLeft = styled(Box)(({ theme }) => ({
   height: "100%",
   flex: 3,
+  [theme.breakpoints.down("lg")]: {
+    flex: 2,
+  },
 }));
 
 export const DashboardRight = styled(Box)(() => ({
@@ -40,7 +47,7 @@ export const TableContainer = styled(Box)(() => ({
   marginTop: "30px",
 }));
 
-export const StatCard = styled(Box)(() => ({
+export const StatCard = styled(Box)(({ theme }) => ({
   width: "275px",
   height: "fit-content",
   padding: "15px",
@@ -57,6 +64,9 @@ export const StatCard = styled(Box)(() => ({
     transform: "scale(1.03)",
     boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
   },
+  [theme.breakpoints.down("md")]: {
+    flex: 1,
+  },
 }));
 
 export const DataGridContainer = styled(Box)(() => ({
@@ -71,15 +81,21 @@ export const InputsContainer = styled(Box)(() => ({
   marginTop: "20px",
 }));
 
-export const SearchInput = styled("input")(() => ({
+export const SearchInput = styled("input")(({ theme }) => ({
   width: "54%",
   outline: "none",
   padding: "8px 20px",
   borderRadius: "5px",
   border: "none",
+  [theme.breakpoints.down("lg")]: {
+    width: "60%",
+  },
+  [theme.breakpoints.down("md")]: {
+    width: "70%",
+  },
 }));
 
-export const ActionBarContainer = styled(Box)(() => ({
+export const ActionBarContainer = styled(Box)(({ theme }) => ({
   width: "80%",
   height: "60%",
   backgroundColor: "#fff",
@@ -89,6 +105,10 @@ export const ActionBarContainer = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
   gap: "20px",
+  [theme.breakpoints.down("md")]: {
+    width: "100%",
+    height: "fit-content",
+  },
 }));
 
 export const ActionBarItem = styled(Box)(() => ({
