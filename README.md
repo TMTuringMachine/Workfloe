@@ -23,6 +23,19 @@
  Note - 
  * Please open admin / employee portal in Private window (if using employee and admin portal simultaneously) to avoid any problems related to authorization!
 
+##  🚀 Functionalities:
+* Admin:
+  - Add Employees
+  - Activate / deActivate Employee accounts
+  - View details (charts and tasks) of all employees with filter of date
+ 
+* Employees:
+  - Add tasks
+  - Edit profile
+  - Change password
+  - View Entire data as per dates and weekly charts
+
+
 ## ⚙️ How we built it
 
 - React Js: For frontend
