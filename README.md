@@ -6,15 +6,22 @@
 
 ### 🌐 Link for Hosted Site [https://workfloe.netlify.app/](https://workfloe.netlify.app/)
 ### 🎨 Figma Link for FrontEnd Design [here](https://www.figma.com/file/G9LKJ3vcvzNN4AA4BNKalU/FLIPR-HACKATHON?node-id=0%3A1)
-### ⛓️ Figma Link for Schema [here](https://www.figma.com/file/dmJDxcGhDkajYb2I616Plz/FLIPR-Schema-Design)
+### 📝 Figma Link for Schema [here](https://www.figma.com/file/dmJDxcGhDkajYb2I616Plz/FLIPR-Schema-Design)
+<h1></h1>
 
-## 🔑 Admin-credentials
-Directly login into admin using the following credentials
- - Email: admin@gmail.com
- - Password: helloworld
+### 🔑 Credentials
+
+#### Admin:
+> - Email: admin@gmail.com
+> - Password: helloworld
+ 
+
+#### Sample Employee:
+> - Email: shivamgavandi256@gmail.com
+> - Password: 1234
  
  Note - 
- * Please open admin portal in Private window (if using employee and admin portal simultaneously) to avoid any problems related to authorization!
+ * Please open admin / employee portal in Private window (if using employee and admin portal simultaneously) to avoid any problems related to authorization!
 
 ## ⚙️ How we built it
 
