@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://workfloe.vercel.app/',
+//   baseURL: 'https://workfloe.vercel.app/',
+  baseURL: 'https://workfloe.herokuapp.com/',
   headers: {
     common: {        // can be common or any other method
       'Access-Control-Allow-Origin': '*'
