@@ -37,6 +37,49 @@ export const getTasksFromDate = (tasks, date) => {
   return newtasks;
 };
 
+export const getTasksPieData = (tasks) => {
+  let meetings = 0;
+  let breaks = 0;
+  let works = 0;
+  tasks.map((t) => {
+    meetings += t.category === "meeting" ? parseInt(t.duration) : 0;
+    breaks += t.category === "break" ? parseInt(t.duration) : 0;
+    works += t.category === "work" ? parseInt(t.duration) : 0;
+  });
+
+  const data = [
+    { name: "meetings", value: meetings },
+    { name: "break", value: breaks },
+    { name: "works", value: works },
+  ];
+
+  return data;
+};
+
+export const getEmployeePieData = (employees) => {
+  let production = 0;
+  let it = 0;
+  let transport = 0;
+
+  employees.map((employee) => {
+    if (employee.department == "Production") {
+      production++;
+    } else if (employee.department == "IT") {
+      it++;
+    } else {
+      transport++;
+    }
+  });
+
+  const data = [
+    { name: "Production", value: production },
+    { name: "IT", value: it },
+    { name: "Transport", value: transport },
+  ];
+
+  return data;
+};
+
 const days = [
   "Sunday",
   "Monday",

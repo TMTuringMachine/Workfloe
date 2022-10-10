@@ -1,13 +1,15 @@
 import React, { useCallback } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import useAuth from "./useAuth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { enqueueSnackbar, useSnackbar } from "notistack";
 import { addTaskSuccess } from "../redux/slices/auth";
+import { getTasksSuccess } from "../redux/slices/task";
 
 const useTask = () => {
   const { user } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
+  const { pulled, tasks } = useSelector((state) => state.task);
   const dispatch = useDispatch();
 
   const addTask = useCallback(async (data) => {
@@ -23,8 +25,21 @@ const useTask = () => {
     enqueueSnackbar(res.data.message, { variant: "success" });
   }, []);
 
+  const getAllTasks = useCallback(async () => {
+    if (pulled) return;
+    const res = await axiosInstance.get("/task/allTasks");
+    console.log(res);
+    if (!res.data.ok) {
+      enqueueSnackbar(res.data.message, { variant: "error" });
+      return;
+    }
+    dispatch(getTasksSuccess(res.data.tasks));
+  }, []);
+
   return {
     addTask,
+    getAllTasks,
+    tasks,
   };
 };
 

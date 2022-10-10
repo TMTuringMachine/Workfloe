@@ -47,23 +47,25 @@ const Header = () => {
           }
         }}
       >
-        <Icon
-          icon="game-icons:air-zigzag"
-          className="logo"
-          width="50px"
-          height="50px"
-          color={palette.backgrond1}
-        />
-        <Typography
-          sx={{
-            fontSize: '1.2em',
-            fontWeight: 700,
-            color: palette.surface,
-            cursor: 'pointer',
-          }}
-        >
-          workfloe
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Icon
+            icon="game-icons:air-zigzag"
+            className="logo"
+            width="40px"
+            height="40px"
+            color={palette.backgrond1}
+          />
+          <Typography
+            sx={{
+              fontSize: '1.2em',
+              fontWeight: 700,
+              color: palette.surface,
+              cursor: 'pointer',
+            }}
+          >
+            workfloe
+          </Typography>
+        </Box>
         <S.CustomSearchBar type="text" placeholder="Search anything!" />
       </S.FlexRow>
       <S.FlexRow>

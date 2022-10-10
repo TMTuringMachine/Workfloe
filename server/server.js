@@ -15,6 +15,10 @@ import './db/conn.js';
 app.use(cors());
 app.use(express.json());
 
+app.get('/',(req,res)=>{
+  res.status(200).send("SERVER IS RUNNING")
+})
+
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 app.use('/task', taskRoutes);

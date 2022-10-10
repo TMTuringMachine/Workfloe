@@ -18,9 +18,9 @@ const PieChartCard = ({ data }) => {
     },
   };
   const COLORS = [
-    ['#0088FE', 'meeting'],
-    ['#00C49F', 'break'],
-    ['#FFBB28', 'work'],
+    ['#0088FE', data[0].name],
+    ['#00C49F', data[1].name],
+    ['#FFBB28', data[2].name],
   ];
   useEffect(() => {
     if (
