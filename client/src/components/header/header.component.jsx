@@ -5,14 +5,14 @@ import {
   Popover,
   Button,
   useTheme,
-} from "@mui/material";
-import React, { useState } from "react";
-import palette from "../../theme/palette";
-import { Icon } from "@iconify/react";
-import useAuth from "../../hooks/useAuth";
-import * as S from "./header.styles";
-import AddTaskModal from "../addTaskModal/addTaskModal.component";
-import { useNavigate } from "react-router-dom";
+} from '@mui/material';
+import React, { useState } from 'react';
+import palette from '../../theme/palette';
+import { Icon } from '@iconify/react';
+import useAuth from '../../hooks/useAuth';
+import * as S from './header.styles';
+import AddTaskModal from '../addTaskModal/addTaskModal.component';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [showTaskModal, setShowTaskModal] = useState(false);
@@ -35,19 +35,19 @@ const Header = () => {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  const id = open ? 'simple-popover' : undefined;
   return (
     <S.HeaderContainer>
       <S.FlexRow
         onClick={() => {
-          if (user.isAdmin) {
-            navigate("/admin/home");
+          if (user?.isAdmin) {
+            navigate('/admin/home');
           } else {
-            navigate("/employee/home");
+            navigate('/employee/home');
           }
         }}
       >
-        <Box sx={{display:'flex',alignItems:'center'}} >
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Icon
             icon="game-icons:air-zigzag"
             className="logo"
@@ -57,10 +57,10 @@ const Header = () => {
           />
           <Typography
             sx={{
-              fontSize: "1.2em",
+              fontSize: '1.2em',
               fontWeight: 700,
               color: palette.surface,
-              cursor: "pointer",
+              cursor: 'pointer',
             }}
           >
             workfloe
@@ -72,11 +72,11 @@ const Header = () => {
         {!user?.isAdmin ? (
           <Button
             sx={{
-              backgroundColor: "#fff",
-              "&:hover": { backgroundColor: "#fff" },
-              [breakpoints.down("md")]: {
-                padding: "5px 7px",
-                fontSize: "0.7em",
+              backgroundColor: '#fff',
+              '&:hover': { backgroundColor: '#fff' },
+              [breakpoints.down('md')]: {
+                padding: '5px 7px',
+                fontSize: '0.7em',
               },
             }}
             onClick={toggleTaskModal}
@@ -93,21 +93,21 @@ const Header = () => {
           anchorEl={anchorEl}
           onClose={handleClose}
           anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "center",
+            vertical: 'bottom',
+            horizontal: 'center',
           }}
           transformOrigin={{
-            vertical: "top",
-            horizontal: "right",
+            vertical: 'top',
+            horizontal: 'right',
           }}
         >
           <S.HeaderMenu>
             <S.HeaderItem
               onClick={() => {
-                if (user.isAdmin) {
-                  navigate("/admin/profile");
+                if (user?.isAdmin) {
+                  navigate('/admin/profile');
                 } else {
-                  navigate("/employee/profile");
+                  navigate('/employee/profile');
                 }
               }}
             >
