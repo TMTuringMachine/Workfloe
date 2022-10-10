@@ -24,5 +24,5 @@ app.use('/user', userRoutes);
 app.use('/task', taskRoutes);
 
 app.listen(port, () => {
-  console.log(`server started on http://localhost:${port}`);
+  //console.log(`server started on http://localhost:${port}`);
 });

@@ -25,7 +25,7 @@ export const createTask = async (req, res) => {
       .status(200)
       .send({ ok: true, message: "Task added successfully!", task });
   } catch (err) {
-    console.log(err);
+    //console.log(err);
     return res.status(400).send({ message: "Something went wrong!" });
   }
 };
@@ -37,7 +37,7 @@ export const getAllTasks = async (req, res) => {
       .status(200)
       .send({ ok: true, message: "Tasks fetched successfully!", tasks });
   } catch (err) {
-    console.log(err);
+    //console.log(err);
     return res.status(400).send({ message: "Something went wrong!" });
   }
 };
