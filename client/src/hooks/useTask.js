@@ -12,17 +12,28 @@ const useTask = () => {
   const { pulled, tasks } = useSelector((state) => state.task);
   const dispatch = useDispatch();
 
-  const addTask = useCallback(async (data) => {
+  const addTask = useCallback(async (data, toggleModal) => {
+    if (
+      data.description == "" ||
+      data.category == "" ||
+      data.startTime == "" ||
+      data.duration == ""
+    ) {
+      enqueueSnackbar("Please fill all the fields!", { variant: "error" });
+      return;
+    }
     const res = await axiosInstance.post(`/task/createTask/${user._id}`, data);
     console.log(res);
     if (!res.data.ok) {
       enqueueSnackbar(res.data.message, { variant: "error" });
+      toggleModal();
       return;
     }
     const task = res.data.task;
     console.log(task, "hehehe");
     dispatch(addTaskSuccess({ task }));
     enqueueSnackbar(res.data.message, { variant: "success" });
+    toggleModal();
   }, []);
 
   const getAllTasks = useCallback(async () => {

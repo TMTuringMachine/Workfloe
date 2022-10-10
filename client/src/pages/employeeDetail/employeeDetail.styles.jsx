@@ -61,7 +61,7 @@ export const EmployeeInfoContainer = styled(Box)(({ theme }) => ({
   },
   [theme.breakpoints.down("md")]: {
     width: "100%",
-    flexDirection: "row",
+    flexDirection: "column",
   },
 }));
 

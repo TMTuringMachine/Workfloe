@@ -7,11 +7,15 @@ export const CustomButton = styled(Button)(() => ({
   padding: '5px 20px',
   backgroundColor: palette.primary,
   color: palette.surface,
+  gap:'10px',
   fontWeight: 600,
   '&:hover': {
     backgroundColor: palette.primary,
     color: palette.surface,
   },
+  '& .MuiCircularProgress-root':{
+    color:"rgba(0, 0, 0, 0.26)"
+  }
 }));
 
 export const MainPage = styled(Box)(({ theme }) => ({

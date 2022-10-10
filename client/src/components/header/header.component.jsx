@@ -66,10 +66,10 @@ const Header = () => {
             workfloe
           </Typography>
         </Box>
-        <S.CustomSearchBar type="text" placeholder="Search anything!" />
+        {/* <S.CustomSearchBar type="text" placeholder="Search anything!" /> */}
       </S.FlexRow>
       <S.FlexRow>
-        {!user.isAdmin ? (
+        {!user?.isAdmin ? (
           <Button
             sx={{
               backgroundColor: "#fff",

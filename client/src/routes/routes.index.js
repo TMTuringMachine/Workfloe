@@ -32,6 +32,10 @@ export default function Router() {
       element: <Login />,
     },
     {
+      path: "*",
+      element: <Login />,
+    },
+    {
       path: "/employee",
       element: <MainLayout />,
       children: [

@@ -29,8 +29,7 @@ const AddTaskModal = ({ state, toggleModal }) => {
   };
   const handleSubmit = () => {
     console.log(data);
-    addTask(data);
-    toggleModal();
+    addTask(data,toggleModal);
     // registerClient(data, toggleModal);
   };
 

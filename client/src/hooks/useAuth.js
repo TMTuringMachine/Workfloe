@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback,useState } from "react";
 
 //libs
 import { useSelector, useDispatch } from "react-redux";
@@ -22,12 +22,27 @@ const useAuth = () => {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
+  const [apiloading, setapiloading] = useState(false);
 
   const registerClient = useCallback(async (userData, toggleModal) => {
+    if (
+      userData.name == "" ||
+      userData.email == "" ||
+      userData.phone == 0 ||
+      userData.department == "" ||
+      userData.joiningDate == "" ||
+      userData.password == ""
+    ) {
+      enqueueSnackbar("Please fill all the fields!", { variant: "error" });
+      return;
+    }
+
     const response = await axios.post("/auth/signup", userData);
     console.log(response, "i am signup response");
     if (!response.data.ok) {
       enqueueSnackbar(response.data.message, { variant: "error" });
+      toggleModal();
+
       return;
     }
     toggleModal();
@@ -35,7 +50,9 @@ const useAuth = () => {
   }, []);
 
   const login = useCallback(async (userData) => {
+    setapiloading(true);
     const response = await axios.post("/auth/login", userData);
+    setapiloading(false);
     console.log(response, "i am login response");
     if (!response.data.ok) {
       enqueueSnackbar(response.data.message, { variant: "error" });
@@ -63,6 +80,12 @@ const useAuth = () => {
       if (response) {
         const { user } = response.data;
         delete user.password;
+        if (user.isActive === false) {
+          dispatch(logoutSuccess());
+          navigate("/");
+          return;
+        }
+
         dispatch(
           initialize({
             user,
@@ -110,6 +133,7 @@ const useAuth = () => {
     isLoggedIn,
     user,
     changePassword,
+    apiloading
   };
 };
 
