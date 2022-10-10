@@ -10,11 +10,11 @@ const Loadable = (Component) => (props) => {
         <CircularProgress
           sx={{
             ...{
-              top: 0,
-              left: 0,
               width: 1,
               zIndex: 9999,
               position: "fixed",
+              top: "50vh",
+              left: "50vw",
             },
           }}
         />
