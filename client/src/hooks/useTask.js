@@ -22,15 +22,20 @@ const useTask = () => {
       enqueueSnackbar("Please fill all the fields!", { variant: "error" });
       return;
     }
+
+    if (!Number(data.duration) || Number(data.duration) > 1000) {
+      enqueueSnackbar("Duration should be a valid number and less than 1000",{variant:"warning"});
+      return;
+    }
     const res = await axiosInstance.post(`/task/createTask/${user._id}`, data);
-    console.log(res);
+    //console.log(res);
     if (!res.data.ok) {
       enqueueSnackbar(res.data.message, { variant: "error" });
       toggleModal();
       return;
     }
     const task = res.data.task;
-    console.log(task, "hehehe");
+    //console.log(task, "hehehe");
     dispatch(addTaskSuccess({ task }));
     enqueueSnackbar(res.data.message, { variant: "success" });
     toggleModal();
@@ -39,7 +44,7 @@ const useTask = () => {
   const getAllTasks = useCallback(async () => {
     if (pulled) return;
     const res = await axiosInstance.get("/task/allTasks");
-    console.log(res);
+    //console.log(res);
     if (!res.data.ok) {
       enqueueSnackbar(res.data.message, { variant: "error" });
       return;

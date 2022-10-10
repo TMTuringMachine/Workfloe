@@ -60,7 +60,7 @@ const AdminDashboard = () => {
 
   const filterEmployees = (query) => {
     const filteredEmp = employees.filter((e) => {
-      console.log(e, query, "uo");
+      //console.log(e, query, "uo");
       return e?.name?.toLowerCase().includes(query?.toLowerCase());
     });
     setFileteredEmployees([...filteredEmp]);
@@ -70,7 +70,7 @@ const AdminDashboard = () => {
     if (searchQuery == "") {
       setFileteredEmployees(employees);
     } else {
-      // console.log(searchQuery);
+      // //console.log(searchQuery);
       filterEmployees(searchQuery);
     }
   }, [searchQuery]);
@@ -87,11 +87,16 @@ const AdminDashboard = () => {
       width: 100,
       renderCell: (params) => {
         const handleSwitchChange = async (e) => {
-          console.log(params.row.id, e.target.checked, "heheheh");
+          //console.log(params.row.id, e.target.checked, "heheheh");
           const res = await axiosInstance.post(
             `user/changeStatus/${params.row.id}`,
             { val: e.target.checked }
           );
+          if (!res.data.ok) {
+            enqueueSnackbar("Somthing went wrong", { variant: "error" });
+            return;
+          }
+          enqueueSnackbar("Employee status changed!", { variant: "success" });
         };
         return (
           <Switch
@@ -241,7 +246,7 @@ const AdminDashboard = () => {
                   />
                 </Box>
                 <Typography sx={{ fontSize: "2em", fontWeight: 700 }}>
-                <CountUp end={tasks.length || 0} duration={1} />
+                  <CountUp end={tasks.length || 0} duration={1} />
                 </Typography>
                 <Typography sx={{ fontWeight: 600, color: palette.primary }}>
                   tasks

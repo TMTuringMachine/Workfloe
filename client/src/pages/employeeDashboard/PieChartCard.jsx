@@ -6,7 +6,7 @@ import * as S from '../login/login.styles.jsx';
 import NotFound from '../../assets/notFound.json';
 
 const PieChartCard = ({ data }) => {
-  console.log(data);
+  //console.log(data);
   const [isEmpty, setIsEmpty] = useState(true);
 
   const defaultOptions = {
@@ -30,7 +30,7 @@ const PieChartCard = ({ data }) => {
       data[2].value === 0
     ) {
       setIsEmpty(true);
-      console.log('bruh');
+      //console.log('bruh');
     } else {
       setIsEmpty(false);
     }

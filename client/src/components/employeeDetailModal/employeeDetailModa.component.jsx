@@ -39,13 +39,9 @@ const EmployeeDetailsModal = ({ state, toggleModal, tasks }) => {
   };
   const { enqueueSnackbar } = useSnackbar();
   const handleFetch = () => {
-    console.log(date);
+    //console.log(date);
     setDayTasks(getTasksFromDate(tasks, date));
     setPieData(getPieData(tasks, moment(date).format('MMM Do YY')));
-    console.log(
-      getPieData(tasks, moment(date).format('MMM Do YY')),
-      'rwkjfnwkef'
-    );
   };
 
   return (

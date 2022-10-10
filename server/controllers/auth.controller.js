@@ -74,7 +74,7 @@ export const signup = expressAsyncHandler(async (req, res) => {
 
 export const jwtVerify = async (req, res) => {
   const token = req.headers.authorization;
-  console.log(`token: ${token}`);
+  //console.log(`token: ${token}`);
   if (!token) {
     return res.send(null);
   }
@@ -90,7 +90,7 @@ export const changePassword = async (req, res) => {
   try {
     const { id } = req.params;
     const { oldpassword, newpassword } = req.body;
-    console.log(req.body, "heheheh");
+    //console.log(req.body, "heheheh");
     const user = await User.findById(id);
     if (!user) {
       return res.send({ ok: false, message: "User not found!" });
@@ -111,7 +111,7 @@ export const changePassword = async (req, res) => {
       .status(200)
       .send({ ok: true, message: "Password changes successfully" });
   } catch (err) {
-    console.log(err);
+    //console.log(err);
     return res.status(400).send({ message: "Something went wrong!" });
   }
 };

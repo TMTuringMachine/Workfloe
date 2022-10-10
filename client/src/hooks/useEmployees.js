@@ -25,7 +25,7 @@ const useEmployees = () => {
       return;
     }
     dispatch(getEmployeesSuccess(res.data.employees));
-    console.log(res, "employee response");
+    //console.log(res, "employee response");
   }, []);
 
   const editProfile = useCallback(async (data, toggleModal) => {
@@ -46,13 +46,13 @@ const useEmployees = () => {
     enqueueSnackbar("Profile editied successfully!", { variant: "success" });
     dispatch(editProfileSuccess({ user: res.data.user }));
     toggleModal();
-    console.log(res, "edit profile result!");
+    //console.log(res, "edit profile result!");
   }, []);
 
   const getEmployeeDetails = useCallback(async (id) => {
     if (currentEmployee != null && id == currentEmployee._id) return;
     const res = await axiosInstance.get(`/user/employee/${id}`);
-    console.log(res, "employee details!");
+    //console.log(res, "employee details!");
     if (!res.data.ok) {
       enqueueSnackbar(res.data.message || "Something went wrong!", {
         variant: "error",

@@ -29,7 +29,6 @@ const AddEmployeeModal = ({ state, toggleModal }) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
   const handleSubmit = () => {
-    console.log(data);
     registerClient(data, toggleModal);
   };
 

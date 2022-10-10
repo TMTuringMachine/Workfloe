@@ -25,6 +25,7 @@ import {
 import { CustomButton, MainPage } from "../../globals/styles";
 import EmployeeDetailsModal from "../../components/employeeDetailModal/employeeDetailModa.component";
 import CountUp from "react-countup";
+import AddTaskModal from "../../components/addTaskModal/addTaskModal.component";
 
 const getTasksCount = (tasks) => {
   const meetings = tasks.filter((a) => a.category == "meeting").length;
@@ -48,7 +49,7 @@ const getTaskDuration = (tasks) => {
   var meeting = 0;
   var work = 0;
   var totalbreak = 0;
-  // console.log(tasks)
+  // //console.log(tasks)
   for (var i = 0; i < tasks.length; i++) {
     if (tasks[i].category === "work") {
       work += tasks[i].duration;
@@ -125,10 +126,28 @@ const EmployeeDashboard = () => {
   const yDate = moment(yesterday).format("MMM Do YY");
   const [showDateModal, setShowDateModal] = useState(false);
   const { breakpoints } = useTheme();
+  const [showTaskModal, setShowTaskModal] = useState(false);
+  const [greeting, setGreeting] = useState("");
+
+  const toggleTaskModal = () => {
+    setShowTaskModal(!showTaskModal);
+  };
 
   const toggleDateModal = () => {
     setShowDateModal(!showDateModal);
   };
+
+  useEffect(() => {
+    let d = new Date();
+    let time = d.getHours();
+    if (time < 12) {
+      setGreeting("Good Morning");
+    } else if (time < 17) {
+      setGreeting("Good Afternoon");
+    } else {
+      setGreeting("Good Evening");
+    }
+  }, []);
 
   return (
     <MainPage>
@@ -160,17 +179,23 @@ const EmployeeDashboard = () => {
               },
             }}
           >
-            Good Morning, <u style={{ color: palette.primary }}>{user?.name}</u>
-            !
+            {greeting || "Good Morning"},{" "}
+            <u style={{ color: palette.primary }}>{user?.name}</u>!
           </Typography>
-          <CustomButton onClick={toggleDateModal} size="small">
-            FILTER BY DATE
-          </CustomButton>
+          <Box sx={{ display: "flex", gap: "20px" }}>
+            <CustomButton onClick={toggleDateModal} size="small">
+              FILTER BY DATE
+            </CustomButton>
+            <CustomButton onClick={toggleTaskModal} size="small">
+              ADD TASK
+            </CustomButton>
+          </Box>
           <EmployeeDetailsModal
             state={showDateModal}
             toggleModal={toggleDateModal}
             tasks={user.tasks}
           />
+          <AddTaskModal state={showTaskModal} toggleModal={toggleTaskModal} />
         </Box>
         <Box
           sx={{
@@ -222,7 +247,7 @@ const EmployeeDashboard = () => {
               <Box
                 sx={{ display: "flex", flexDirection: "column", gap: "5px" }}
               >
-                <Typography sx={{ fontWeight: 600, fontSize: '1.2em' }}>
+                <Typography sx={{ fontWeight: 600, fontSize: "1.2em" }}>
                   {user?.name}
                 </Typography>
                 <Typography sx={{ fontSize: "0.8em", color: "#7e7e7e" }}>

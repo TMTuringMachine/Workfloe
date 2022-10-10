@@ -9,9 +9,9 @@ mongoose.connect(mongoURI,{
     useUnifiedTopology: true
 })
 .then(()=>{
-    console.log('CONNECTED TO DB');
+    //console.log('CONNECTED TO DB');
 })
 .catch(err => {
-    console.log('CONNECTION TO DB FAILED!');
-    console.log(err);
+    //console.log('CONNECTION TO DB FAILED!');
+    //console.log(err);
 })

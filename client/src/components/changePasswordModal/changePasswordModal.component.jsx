@@ -27,7 +27,7 @@ const ChangePasswordModal = ({ state, toggleModal }) => {
   };
   const { enqueueSnackbar } = useSnackbar();
   const handleSubmit = () => {
-    console.log(data);
+    //console.log(data);
     if (data.newpassword !== data.cpassword) {
       enqueueSnackbar("Passwords do not match", { variant: "error" });
       return;

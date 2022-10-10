@@ -9,7 +9,7 @@ export const getAllEmployees = async (req, res) => {
       employees,
     });
   } catch (err) {
-    console.log(err);
+    //console.log(err);
     return res.status(400).send({ message: "Something went wrong!" });
   }
 };
@@ -29,17 +29,17 @@ export const changeEmployeeStatus = async (req, res) => {
       employeeStatus: val,
     });
   } catch (err) {
-    console.log(err);
+    //console.log(err);
     return res.status(400).send({ message: "Something went wrong!" });
   }
 };
 
 export const editUserProfile = async (req, res) => {
   try {
-    console.log("hello i am hrererere");
+    //console.log("hello i am hrererere");
     const { id } = req.params;
     const { name, department } = req.body;
-    console.log(req.file, "rjfsehwiekfhwe");
+    //console.log(req.file, "rjfsehwiekfhwe");
 
     const user = await User.findById(id);
     if (!user) {
@@ -62,7 +62,7 @@ export const editUserProfile = async (req, res) => {
       user,
     });
   } catch (err) {
-    console.log(err);
+    //console.log(err);
     return res.status(400).send({ message: "Something went wrong!" });
   }
 };
@@ -81,7 +81,7 @@ export const getOneEmployee = async (req, res) => {
       employee: user,
     });
   } catch (err) {
-    console.log(err);
+    //console.log(err);
     return res.status(400).send({ message: "Something went wrong!" });
   }
 };
@@ -99,7 +99,7 @@ export const deleteEmployee = async (req, res) => {
       return res.status(400).send({ message: "Something went wrong!" });
     }    
   } catch (err) {
-    console.log(err);
+    //console.log(err);
     return res.status(400).send({ message: "Something went wrong!" });
   }
 };

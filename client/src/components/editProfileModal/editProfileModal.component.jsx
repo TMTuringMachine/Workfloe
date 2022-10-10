@@ -39,7 +39,7 @@ const EditProfileModal = ({ state, toggleModal }) => {
   };
 
   const onDrop = useCallback((acceptedFiles) => {
-    console.log(acceptedFiles);
+    //console.log(acceptedFiles);
     setData({
       name: user.name,
       department: user.department,
@@ -64,7 +64,7 @@ const EditProfileModal = ({ state, toggleModal }) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
   const handleSubmit = () => {
-    console.log(data);
+    //console.log(data);
     const formdata = new FormData();
     formdata.append("image", imageToUpload);
     formdata.append("name", data.name);

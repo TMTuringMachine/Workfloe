@@ -38,7 +38,7 @@ const useAuth = () => {
     }
 
     const response = await axios.post("/auth/signup", userData);
-    console.log(response, "i am signup response");
+    //console.log(response, "i am signup response");
     if (!response.data.ok) {
       enqueueSnackbar(response.data.message, { variant: "error" });
       toggleModal();
@@ -53,7 +53,7 @@ const useAuth = () => {
     setapiloading(true);
     const response = await axios.post("/auth/login", userData);
     setapiloading(false);
-    console.log(response, "i am login response");
+    //console.log(response, "i am login response");
     if (!response.data.ok) {
       enqueueSnackbar(response.data.message, { variant: "error" });
       return;
@@ -76,7 +76,7 @@ const useAuth = () => {
     if (isValidToken(accessToken)) {
       setSession(accessToken);
       const response = await axios.get("/auth/jwtVerify");
-      console.log(response, "i am initialize response");
+      //console.log(response, "i am initialize response");
       if (response) {
         const { user } = response.data;
         delete user.password;
@@ -115,7 +115,7 @@ const useAuth = () => {
       `/auth/changePassword/${user._id}`,
       data
     );
-    console.log(res, "change password response");
+    //console.log(res, "change password response");
     if (!res.data.ok) {
       enqueueSnackbar(res.data?.message || "Something went wrong!", {
         variant: "error",
