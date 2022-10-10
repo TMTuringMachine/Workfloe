@@ -40,7 +40,7 @@ const Header = () => {
     <S.HeaderContainer>
       <S.FlexRow
         onClick={() => {
-          if (user.isAdmin) {
+          if (user?.isAdmin) {
             navigate('/admin/home');
           } else {
             navigate('/employee/home');
@@ -67,7 +67,7 @@ const Header = () => {
         <S.CustomSearchBar type="text" placeholder="Search anything!" />
       </S.FlexRow>
       <S.FlexRow>
-        {!user.isAdmin ? (
+        {!user?.isAdmin ? (
           <Button
             sx={{
               backgroundColor: '#fff',
@@ -102,7 +102,7 @@ const Header = () => {
           <S.HeaderMenu>
             <S.HeaderItem
               onClick={() => {
-                if (user.isAdmin) {
+                if (user?.isAdmin) {
                   navigate('/admin/profile');
                 } else {
                   navigate('/employee/profile');
