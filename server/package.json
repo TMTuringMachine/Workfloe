@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "nodemon": "nodemon server.js",
-    "start": "node index.js"
+    "start": "node --max_old_space_size=4096 index.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
