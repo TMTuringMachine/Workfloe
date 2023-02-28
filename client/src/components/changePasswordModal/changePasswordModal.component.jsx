@@ -8,18 +8,18 @@ import {
   InputLabel,
   FormControl,
   Box,
-} from "@mui/material";
-import React, { useState } from "react";
-import { CustomButton } from "../../globals/styles";
-import { ModalContainer } from "./changePasswordModal.styles";
-import { useSnackbar } from "notistack";
-import useAuth from "../../hooks/useAuth";
+} from '@mui/material';
+import React, { useState } from 'react';
+import { CustomButton } from '../../globals/styles';
+import { ModalContainer } from './changePasswordModal.styles';
+import { useSnackbar } from 'notistack';
+import useAuth from '../../hooks/useAuth';
 
 const ChangePasswordModal = ({ state, toggleModal }) => {
   const [data, setData] = useState({
-    oldpassword: "",
-    newpassword: "",
-    cpassword: "",
+    oldpassword: '',
+    newpassword: '',
+    cpassword: '',
   });
   const { changePassword } = useAuth();
   const handleChange = (e) => {
@@ -29,7 +29,7 @@ const ChangePasswordModal = ({ state, toggleModal }) => {
   const handleSubmit = () => {
     //console.log(data);
     if (data.newpassword !== data.cpassword) {
-      enqueueSnackbar("Passwords do not match", { variant: "error" });
+      enqueueSnackbar('Passwords do not match', { variant: 'error' });
       return;
     }
     changePassword({
@@ -44,7 +44,7 @@ const ChangePasswordModal = ({ state, toggleModal }) => {
     <Modal open={state} onClose={toggleModal}>
       <Slide direction="up" in={state}>
         <ModalContainer>
-          <Typography sx={{ fontSize: "1.2em", fontWeight: 600 }}>
+          <Typography sx={{ fontSize: '1.2em', fontWeight: 600 }}>
             CHANGE PASSWORD
           </Typography>
 

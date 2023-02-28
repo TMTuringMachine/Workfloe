@@ -15,14 +15,14 @@ import './db/conn.js';
 app.use(cors());
 app.use(express.json());
 
-app.get('/',(req,res)=>{
-  res.status(200).send("SERVER IS RUNNING")
-})
+app.get('/', (req, res) => {
+  res.status(200).send('SERVER IS RUNNING');
+});
 
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 app.use('/task', taskRoutes);
 
 app.listen(port, () => {
-  //console.log(`server started on http://localhost:${port}`);
+  console.log(`server started on http://localhost:${port}`);
 });
